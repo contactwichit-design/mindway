@@ -27,6 +27,38 @@ Before any work:
 - Never imply endorsement, partnership, or authorship without evidence and consent.
 - Preserve the freedom of every participant to think and decide for themselves.
 
+## Execution Loop — `/myN`
+
+Mindway supports bounded continuation syntax `/myN`, where `N` is an integer from 1 to 99.
+
+Examples: `/my1`, `/my10`, `/my50`, `/my99`.
+
+`/myN` means: perform up to N useful internal Mindway execution cycles for the current task before declaring the run complete, subject to safety, approval, tool, context, token, runtime, and platform limits.
+
+A cycle is a meaningful unit of progress, not one tool call and not one chat message. Each cycle follows:
+
+`ORIENT → EXECUTE → VERIFY → RECORD → DECIDE`
+
+Before another cycle, preserve the original mission, re-orient against canonical Mindway and current run state, then continue from the highest-value unfinished action. Re-read the canonical source when access is available and the read is materially useful; when a verified unchanged version/hash is available, do not waste cycles repeatedly downloading identical content.
+
+The agent must not stop merely because one subtask or tool call finished. It stops when the task is verified complete, the requested useful-cycle budget is exhausted, a real user/approval gate is reached, execution is blocked, a platform boundary is reached, or another cycle would add no meaningful value.
+
+If the task completes before N, stop early and report that unused cycles were unnecessary. Never perform meaningless repetition to consume the requested number.
+
+Ordinary chat cannot autonomously send itself a new assistant turn after the final response without an external orchestrator or new trigger. `/myN` therefore governs continuation inside the active execution opportunity and requires a resumable checkpoint if a platform boundary interrupts unfinished work. Never claim autonomous post-final continuation unless an actual supporting orchestrator exists.
+
+Full runtime rules: [skills/execution-loop/SKILL.md](skills/execution-loop/SKILL.md)
+
+## `/fy` — cycle estimator
+
+`/fy` estimates the useful `/myN` budget for a task before execution.
+
+It considers scope, source/discovery load, execution depth, QC/risk, iteration uncertainty, external systems, batch size, and whether a reusable runtime already exists.
+
+It returns a recommended `/myN`, a reasonable range, confidence, expected phases, and likely stop gates. The estimate is a maximum useful cycle budget, not a requirement to waste every cycle.
+
+Full estimator rules: [skills/fy/SKILL.md](skills/fy/SKILL.md)
+
 ## Graphic Runtime — mandatory for `/my`
 
 For every `/my` session, all graphic or visual-media design work must use a code-first rendering workflow by default. This includes posters, infographics, social graphics, presentation visuals, diagrams, visual documents, PDFs, motion graphics, and video.
@@ -54,10 +86,14 @@ This rule applies automatically to every AI, agent, chat, or tool that starts wo
 
 If this public source cannot be read, say so clearly. Do not pretend Mindway was loaded from memory.
 
-## The only command
+## The commands
 
 ```text
 /my
+/my1 ... /my99
+/fy
 ```
 
-Compatibility note: other commands may exist in private extensions, but public Mindway has one human-facing command: `/my`.
+`/my` remains the default human-facing entry. `/myN` is its bounded execution-loop form, and `/fy` is its cycle-budget estimator.
+
+Compatibility note: other commands may exist in private extensions.
