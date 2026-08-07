@@ -1,0 +1,108 @@
+{
+  "run_id": "RUN-DEMO-001",
+  "runs_dir": "runs",
+  "mission": "Research, design, challenge, implement, and verify the requested system.",
+  "constraints": [
+    "Follow canonical Mindway",
+    "Use evidence over majority vote",
+    "Do not claim source/tool access that did not occur",
+    "Do not persist credentials or secrets"
+  ],
+  "requested_cycles": 12,
+  "topology": "HYBRID",
+  "agents": [
+    {
+      "name": "research-ai",
+      "role": "researcher",
+      "command": ["YOUR_AI_CLI", "YOUR_NONINTERACTIVE_ARGS"],
+      "timeout_seconds": 900
+    },
+    {
+      "name": "architecture-ai",
+      "role": "architect",
+      "command": ["YOUR_AI_CLI", "YOUR_NONINTERACTIVE_ARGS"],
+      "timeout_seconds": 900
+    },
+    {
+      "name": "builder-ai",
+      "role": "builder",
+      "command": ["YOUR_AI_CLI", "YOUR_NONINTERACTIVE_ARGS"],
+      "timeout_seconds": 1200
+    },
+    {
+      "name": "risk-ai",
+      "role": "failure_hunter",
+      "command": ["YOUR_AI_CLI", "YOUR_NONINTERACTIVE_ARGS"],
+      "timeout_seconds": 900
+    },
+    {
+      "name": "evidence-ai",
+      "role": "evidence_checker",
+      "command": ["YOUR_AI_CLI", "YOUR_NONINTERACTIVE_ARGS"],
+      "timeout_seconds": 900
+    },
+    {
+      "name": "critic-ai",
+      "role": "critic",
+      "command": ["YOUR_AI_CLI", "YOUR_NONINTERACTIVE_ARGS"]
+    },
+    {
+      "name": "synthesis-ai",
+      "role": "synthesizer",
+      "command": ["YOUR_AI_CLI", "YOUR_NONINTERACTIVE_ARGS"]
+    },
+    {
+      "name": "fixer-ai",
+      "role": "fixer",
+      "command": ["YOUR_AI_CLI", "YOUR_NONINTERACTIVE_ARGS"]
+    },
+    {
+      "name": "verify-ai",
+      "role": "verifier",
+      "command": ["YOUR_AI_CLI", "YOUR_NONINTERACTIVE_ARGS"]
+    }
+  ],
+  "workstreams": [
+    {
+      "id": "A1",
+      "agent": "research-ai",
+      "role": "researcher",
+      "goal": "Find evidence, prior art, alternatives, and reusable patterns.",
+      "expected_output": "Evidence-backed findings with sources, trade-offs, and uncertainties."
+    },
+    {
+      "id": "A2",
+      "agent": "architecture-ai",
+      "role": "architect",
+      "goal": "Design architecture, interfaces, dependencies, and reversible execution plan.",
+      "expected_output": "Architecture and decision rationale."
+    },
+    {
+      "id": "A3",
+      "agent": "builder-ai",
+      "role": "builder",
+      "goal": "Produce the implementation or primary artifact.",
+      "expected_output": "Implementation plus verification notes."
+    },
+    {
+      "id": "A4",
+      "agent": "risk-ai",
+      "role": "failure_hunter",
+      "goal": "Find failure modes, edge cases, regressions, and unsafe assumptions.",
+      "expected_output": "Ranked risks and concrete mitigations."
+    },
+    {
+      "id": "A5",
+      "agent": "evidence-ai",
+      "role": "evidence_checker",
+      "goal": "Validate claims, source fidelity, reproducibility, and unresolved uncertainty.",
+      "expected_output": "Evidence/QC report."
+    }
+  ],
+  "stages": {
+    "critic": "critic-ai",
+    "synthesizer": "synthesis-ai",
+    "fixer": "fixer-ai",
+    "verifier": "verify-ai"
+  }
+}
