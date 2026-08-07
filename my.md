@@ -33,7 +33,7 @@ Mindway supports bounded continuation syntax `/myN`, where `N` is an integer fro
 
 Examples: `/my1`, `/my10`, `/my50`, `/my99`.
 
-`/myN` means: perform up to N useful internal Mindway execution cycles for the current task before declaring the run complete, subject to safety, approval, tool, context, token, runtime, and platform limits.
+`/myN` means: perform up to N useful Mindway execution cycles for the current task before declaring the run complete, subject to safety, approval, tool, context, token, runtime, and platform limits.
 
 A cycle is a meaningful unit of progress, not one tool call and not one chat message. Each cycle follows:
 
@@ -49,15 +49,51 @@ Ordinary chat cannot autonomously send itself a new assistant turn after the fin
 
 Full runtime rules: [skills/execution-loop/SKILL.md](skills/execution-loop/SKILL.md)
 
-## `/fy` — cycle estimator
+## `/fy` — execution planner
 
-`/fy` estimates the useful `/myN` budget for a task before execution.
+`/fy` estimates the useful `/myN` budget and chooses how the work should run.
 
-It considers scope, source/discovery load, execution depth, QC/risk, iteration uncertainty, external systems, batch size, and whether a reusable runtime already exists.
+It evaluates scope, discovery load, execution depth, QC/risk, iteration uncertainty, external systems, batch size, and available runtimes, then chooses:
 
-It returns a recommended `/myN`, a reasonable range, confidence, expected phases, and likely stop gates. The estimate is a maximum useful cycle budget, not a requirement to waste every cycle.
+- `SEQUENTIAL` — one path with bounded continuation;
+- `PARALLEL` — independent workstreams run concurrently when supported;
+- `HYBRID` — fan-out specialist work followed by synthesis, critique, repair, and independent verification.
 
-Full estimator rules: [skills/fy/SKILL.md](skills/fy/SKILL.md)
+It returns a recommended `/myN`, range, topology, worker count, workstreams, execution graph, QC path, confidence, and stop gates.
+
+One cycle means one meaningful agent execution unit. Parallel cycles may execute concurrently when an actual orchestrator supports it.
+
+Full planner rules: [skills/fy/SKILL.md](skills/fy/SKILL.md)
+
+## Swarm Runtime — adaptive multi-agent execution
+
+When `/fy` determines that multiple independent perspectives or workstreams materially improve the result, use Mindway Swarm Runtime.
+
+Default substantial-work pattern:
+
+`MISSION → /fy → DECOMPOSE → SPECIALIST WORKERS → SHARED RUN BOARD → CRITIC → SYNTHESIZER → FIXER → INDEPENDENT VERIFIER → RELEASE`
+
+Key rules:
+
+1. Evidence outranks vote count.
+2. Do not make every worker identical unless deliberate ensemble redundancy is needed.
+3. Prefer differentiated roles such as research, architecture, build, failure hunting, and evidence checking.
+4. Workers coordinate through a shared run board rather than uncontrolled peer-to-peer conversation.
+5. Fan-in must deduplicate, preserve provenance, expose conflicts, and distinguish fact/inference/proposal/uncertainty.
+6. Debate only disputed or high-risk items when possible; do not spend cycles arguing about agreement.
+7. The maker should not be the final verifier of the maker's own work when independent verification is available.
+8. If verification fails but the issue is repairable and budget remains, return to repair rather than pretending completion.
+9. Stop early when verified complete; never consume agents or cycles merely to satisfy a number.
+10. Never claim autonomous multi-agent execution unless an actual orchestrator/tool/process performed it.
+
+Full runtime rules: [skills/swarm-runtime/SKILL.md](skills/swarm-runtime/SKILL.md)
+
+Provider-agnostic external runner reference:
+
+- [runtime/swarm_runner.py](runtime/swarm_runner.py)
+- [runtime/swarm.example.json](runtime/swarm.example.json)
+
+The external runner can invoke configured AI CLI processes concurrently, persist a run board/checkpoints, synthesize results, critique, repair, verify, and resume interrupted runs. It intentionally contains no credentials and does not require one AI vendor.
 
 ## Graphic Runtime — mandatory for `/my`
 
@@ -94,6 +130,6 @@ If this public source cannot be read, say so clearly. Do not pretend Mindway was
 /fy
 ```
 
-`/my` remains the default human-facing entry. `/myN` is its bounded execution-loop form, and `/fy` is its cycle-budget estimator.
+`/my` remains the default human-facing entry. `/myN` is its bounded execution-loop form, and `/fy` is its adaptive execution planner.
 
 Compatibility note: other commands may exist in private extensions.
