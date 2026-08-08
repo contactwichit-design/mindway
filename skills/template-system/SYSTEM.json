@@ -1,0 +1,63 @@
+{
+  "name": "Mindway Universal Template System",
+  "version": "0.2.0",
+  "status": "REVIEW_READY",
+  "principle": "Begin from intent, compose the minimum sufficient families, preserve source truth, verify before completion.",
+  "flow": ["REQUEST","ROUTE","COMPOSE","SOURCE","EXECUTE","VERIFY","OUTPUT","HANDOFF"],
+  "primitives": [
+    "MISSION","INPUT","SOURCE","CONSTRAINT","PROCESS","OUTPUT","EVIDENCE","QA","BLOCKER","NEXT","STATUS"
+  ],
+  "family_ids": ["T01","T02","T03","T04","T05","T06","T07","T08","T09","T10","T11","T12","T13","T14","T15","T16","T17","T18"],
+  "families": {
+    "T01": {"name":"Mission / Task","behavior":"define work and completion","required":["MISSION","INPUT","CONSTRAINT","OUTPUT","NEXT","STATUS"],"outputs":["task brief","execution contract"]},
+    "T02": {"name":"Research / Discovery","behavior":"discover and ground","required":["MISSION","SOURCE","EVIDENCE","QA","NEXT","STATUS"],"outputs":["research note","source map","comparison"]},
+    "T03": {"name":"Plan / Execution","behavior":"sequence work","required":["MISSION","PROCESS","CONSTRAINT","BLOCKER","NEXT","STATUS"],"outputs":["plan","roadmap","run board"]},
+    "T04": {"name":"Decision","behavior":"choose with evidence","required":["MISSION","SOURCE","EVIDENCE","CONSTRAINT","QA","NEXT","STATUS"],"outputs":["decision memo","recommendation"]},
+    "T05": {"name":"Status / Compact HUD","behavior":"expose delta and next state","required":["MISSION","EVIDENCE","BLOCKER","NEXT","STATUS"],"outputs":["routine report","status HUD"]},
+    "T06": {"name":"HOFF / Continuity","behavior":"resume without rediscovery","required":["MISSION","SOURCE","EVIDENCE","BLOCKER","NEXT","STATUS"],"outputs":["handoff","checkpoint"]},
+    "T07": {"name":"QA / Review","behavior":"verify quality and completion","required":["SOURCE","EVIDENCE","QA","BLOCKER","STATUS"],"outputs":["QC report","acceptance gate","regression result"]},
+    "T08": {"name":"Data / Analysis","behavior":"structure and interpret data","required":["MISSION","INPUT","SOURCE","PROCESS","EVIDENCE","QA","OUTPUT"],"outputs":["analysis","KPI","dashboard data"]},
+    "T09": {"name":"Communication","behavior":"move a recipient to action","required":["MISSION","INPUT","CONSTRAINT","OUTPUT","QA"],"outputs":["email","LINE message","memo copy","announcement"]},
+    "T10": {"name":"Document","behavior":"produce structured reading artifact","required":["MISSION","SOURCE","CONSTRAINT","OUTPUT","QA"],"outputs":["report","SOP","proposal","PDF","DOCX"]},
+    "T11": {"name":"Visual / Graphic","behavior":"communicate visually","required":["MISSION","SOURCE","CONSTRAINT","PROCESS","OUTPUT","QA"],"outputs":["graphic","infographic","diagram","poster"]},
+    "T12": {"name":"Presentation","behavior":"narrative across frames","required":["MISSION","SOURCE","PROCESS","CONSTRAINT","OUTPUT","QA"],"outputs":["deck","training presentation"]},
+    "T13": {"name":"Web / UI","behavior":"interactive information and action surface","required":["MISSION","SOURCE","PROCESS","CONSTRAINT","OUTPUT","QA","BLOCKER"],"outputs":["site","dashboard","app UI"]},
+    "T14": {"name":"Learning / LMS","behavior":"teach and assess","required":["MISSION","SOURCE","PROCESS","OUTPUT","EVIDENCE","QA","BLOCKER"],"outputs":["module","lesson","quiz","assignment"]},
+    "T15": {"name":"Media Production","behavior":"timed audiovisual communication","required":["MISSION","SOURCE","PROCESS","OUTPUT","EVIDENCE","QA","BLOCKER"],"outputs":["video","audio","motion","subtitle package"]},
+    "T16": {"name":"Automation / Agent","behavior":"repeat or trigger work reliably","required":["MISSION","INPUT","PROCESS","CONSTRAINT","EVIDENCE","QA","BLOCKER","STATUS"],"outputs":["routine","workflow","agent contract"]},
+    "T17": {"name":"Blocker / Recovery","behavior":"recover safe progress","required":["BLOCKER","EVIDENCE","PROCESS","NEXT","STATUS"],"outputs":["blocker packet","fallback plan","recovery route"]},
+    "T18": {"name":"Evolution / Maintenance","behavior":"improve reusable capability","required":["MISSION","SOURCE","EVIDENCE","QA","BLOCKER","NEXT","STATUS"],"outputs":["update proposal","benchmark note","regression note"]}
+  },
+  "recipes": {
+    "approval_memo": ["T01","T09","T10","T07"],
+    "research_report": ["T01","T02","T10","T07"],
+    "project_plan": ["T01","T03","T17","T07"],
+    "decision_support": ["T01","T02","T04","T07"],
+    "routine_status": ["T01","T05","T17","T07"],
+    "handoff": ["T01","T06","T07"],
+    "data_dashboard": ["T01","T08","T04","T13","T07"],
+    "graphic": ["T01","T11","T07"],
+    "presentation": ["T01","T12","T11","T07"],
+    "web_product": ["T01","T13","T07","T06"],
+    "lms_lesson": ["T01","T14","T15","T11","T07","T06"],
+    "video": ["T01","T15","T11","T07"],
+    "automation": ["T01","T16","T05","T17","T07"],
+    "skill_evolution": ["T01","T18","T07","T06"]
+  },
+  "router_rules": {
+    "minimum_families": true,
+    "behavior_before_extension": true,
+    "existing_before_new": true,
+    "owner_system_over_generic": true,
+    "locked_template_over_generic": true,
+    "content_renderer_separation": true,
+    "visual_code_first_under_my": true,
+    "soft_blocker_route_around": true,
+    "hard_gate_stop_only_affected_action": true,
+    "no_final_without_required_evidence_and_approval": true
+  },
+  "blocker_contract": ["exact_action","reason","evidence","validity:HARD|SOFT|INVALID","safe_fallback","work_continued","unblock_condition"],
+  "status_values": ["DONE","REVIEW_READY","NEED_CONFIRM","BLOCKED","IN_PROGRESS","UNCHANGED","SKIPPED","NOT_DONE"],
+  "renderer_profiles": ["chat_compact","markdown","html","pdf","docx","slides","image","video","connected_system"],
+  "design_profile_policy": "Design is an override layer; it must not alter source truth or workflow semantics."
+}
