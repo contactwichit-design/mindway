@@ -1,7 +1,7 @@
 ---
 name: template-system
 description: Route recurring Mindway work into reusable intent-based template families, machine-readable primitives, design profiles, renderers, QA and blocker recovery so AI can execute faster with less guesswork and duplication.
-version: 0.2.0
+version: 0.2.1
 status: REVIEW_READY
 ---
 
@@ -18,12 +18,16 @@ Do not begin from file type. Begin from intent and compose reusable behavioral f
 Prefer UPDATE_EXISTING over CREATE_NEW. Reuse structured content across renderers whenever possible.
 
 ## System components
-- `REGISTRY.md` — compact T01–T18 index.
+- `QUICKSTART.md` — shortest human/AI entry and common recipes.
+- `REGISTRY.md` — compact T01–T18 index and fast-load order.
 - `SYSTEM.json` — machine-readable families, primitives, recipes and rules.
 - `ROUTER.md` — AI routing contract.
 - `FAMILIES.md` — full behavioral contracts for all 18 families.
+- `TEMPLATES.md` — fillable T01–T18 YAML skeletons.
 - `DESIGN_PROFILE_ZAFT_PERSONAL.md` — personal design override layer.
-- `TESTS.md` — routing/regression/benchmark protocol.
+- `TESTS.md` — routing/regression/production-benchmark protocol.
+- `BENCHMARK.md` — current structural productivity evidence and unproven claims.
+- `INTEGRATION_PROPOSAL.md` — governed proposal for possible future `/my` integration.
 - `runtime/template_router.py` — deterministic behavior-tag/recipe router and self-tests.
 
 ## Universal primitives
@@ -96,11 +100,12 @@ Completion is determined by the strongest applicable task-specific/owner-system 
 Update this system only when evidence shows reduced cycle time/manual steps, reduced error/rework, improved consistency/quality, closed safety/capability/regression gap, or proven scale/maintenance need. Avoid family proliferation.
 
 ## Verification status
-- 18 family contracts defined.
-- machine-readable registry created.
-- deterministic router created and read back.
+- 18 family contracts and 18 fillable templates defined.
+- machine-readable registry and deterministic router created and read back.
 - 5 deterministic routing self-tests pass in equivalent runtime validation.
 - 15 representative routing cases + 7 regression cases documented.
-- core canonical `/my` not modified automatically.
+- 14 default recipes select 3–6 families, average 4.14; this is ~76.98% fewer family contracts loaded than a naive all-18 baseline. This is structural context reduction, not an exact token-savings claim.
+- ZAFT Personal design profile defined as a non-governance override layer.
+- core canonical `/my` was not modified automatically.
 
-Current status: REVIEW_READY. Promotion to APPROVED/LOCKED remains an owner/governance decision.
+Current status: REVIEW_READY. Promotion to APPROVED/LOCKED or canonical `/my` integration remains an owner/governance decision after production benchmark evidence.
