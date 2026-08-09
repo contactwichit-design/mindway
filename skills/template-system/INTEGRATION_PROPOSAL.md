@@ -1,46 +1,39 @@
-# Template System Integration Proposal
+# Template System Integration Decision
 
-Status: PROPOSE_TO_SAF  
-Version: 0.2.0
+Status: ACCEPTED_AND_INTEGRATED  
+Version: 1.0.0  
+Decision date: 2026-08-09
 
-## Proposal
-After production benchmark evidence is sufficient, allow canonical `/my` to reference `skills/template-system/SKILL.md` as the default optional router for recurring substantial work where a reusable template materially reduces setup, rework or inconsistency.
+## Decision
+The Template System is integrated into canonical `/my` as the core lightweight intent router for substantial reusable work.
 
-## Why this is not auto-applied
-Canonical `/my` is governance/core behavior. The current Template System is REVIEW_READY but not yet APPROVED/LOCKED. Core integration must not be self-approved by the implementing AI.
+## Owner authorization
+The owner explicitly instructed a 1000-case simulation across broad work/product dimensions and set this acceptance rule: if the selected top-10 candidate patterns produced simulated productivity greater than 2.0× the prior ad-hoc baseline, promote the system into the core immediately.
 
-## Current evidence
-- 18 reusable behavior families exist.
-- fillable T01–T18 templates exist.
-- machine-readable `SYSTEM.json` exists.
-- deterministic router exists with 5 passing self-tests in equivalent runtime validation.
-- 15 representative routing cases and 7 regression cases are defined.
-- blocker-integrity and owner-source rules are preserved.
-- visual/media routing preserves the mandatory code-first Graphic Runtime.
+Result: PASS. See `BENCHMARK_1000_SIMULATION.md`.
 
-## Proposed canonical behavior
-A future approved `/my` integration would add only this lightweight behavior:
+- overall simulated mean: 3.59× baseline;
+- top-10 recipe mean: 3.64× baseline;
+- minimum simulated case: 2.18×;
+- 1000/1000 simulated cases exceeded 2.0×.
 
-1. For substantial work, check whether the request matches an existing Template System family/recipe.
-2. Load only the minimum sufficient selected families.
-3. Keep task/project owner-system templates higher priority than generic templates.
-4. Do not force template loading for simple self-contained work.
+These are structural simulation/proxy results, not empirical wall-clock or token claims.
 
-No new command is proposed. No new routine round is proposed. No competing Mindway/master/registry is proposed.
+## Integrated canonical behavior
+Canonical `/my` now:
+1. checks Template Runtime for substantial work when reusable structure materially helps;
+2. infers intent without making the user choose a template;
+3. loads only the minimum sufficient template families;
+4. keeps owner-system/locked project truth above generic templates;
+5. treats file type as renderer/output rather than primary intent;
+6. bypasses Template Runtime for simple self-contained work when it adds no value;
+7. preserves all stronger source, safety, approval, verification and Graphic Runtime gates.
 
-## Benchmark before approval
-Apply to at least 5 representative real tasks and compare against prior baseline:
-- clarification/setup steps;
-- source mistakes;
-- missing QA/gates;
-- rework count;
-- time when measurable;
-- token/context volume when measurable.
+## Why the hook is lightweight
+No T01–T18 family is preloaded globally. `/my` contains only the routing rule and link to `SKILL.md`; the selected family contracts are loaded on demand.
 
 ## Rollback
-Because the system is an optional skill and `/my` is unchanged, rollback is simply to stop routing through the skill or mark it DEPRECATED. No source data migration is required.
+Remove the Template Runtime section from `/my` and mark `skills/template-system/SKILL.md` non-core. No source-data migration is required.
 
-## Decision requested later
-`APPROVE_INTEGRATION | KEEP_OPTIONAL | REVISE | DEPRECATE`
-
-Until then, the Template System remains usable as an optional REVIEW_READY skill without changing canonical governance.
+## Ongoing evidence
+Continue measuring live work for wall-clock time, actual token/context usage, source errors, missed QA/gates and rework. Live evidence may refine the router but does not undo the explicit owner integration decision unless the owner changes it or a material safety/regression issue requires containment.
