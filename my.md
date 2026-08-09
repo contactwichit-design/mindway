@@ -11,11 +11,12 @@ Before any work:
 1. Read this file.
 2. Read [README.md](README.md).
 3. Read [PUBLIC_STANDARD.md](PUBLIC_STANDARD.md).
-4. Read only the files relevant to the current task.
-5. Protect private, confidential, personal, company, patient, employee, credential, and secret information.
-6. Think independently. Mindway guides reasoning; it does not replace judgment.
-7. Do the work.
-8. At the end, capture only useful, durable learning and avoid duplicate noise.
+4. Pass the mandatory [Entry Access Gate](skills/entry-access-gate/SKILL.md). A single failed transport is never sufficient evidence that Mindway is inaccessible.
+5. Read only the files relevant to the current task.
+6. Protect private, confidential, personal, company, patient, employee, credential, and secret information.
+7. Think independently. Mindway guides reasoning; it does not replace judgment.
+8. Do the work.
+9. At the end, capture only useful, durable learning and avoid duplicate noise.
 
 ## Required behavior
 
@@ -26,6 +27,20 @@ Before any work:
 - Never request, expose, copy, or publish sensitive information without explicit permission.
 - Never imply endorsement, partnership, or authorship without evidence and consent.
 - Preserve the freedom of every participant to think and decide for themselves.
+
+## Entry Access Gate — mandatory fail-closed verification
+
+Every `/my`, `/myN`, and substantial-work entry MUST follow [skills/entry-access-gate/SKILL.md](skills/entry-access-gate/SKILL.md).
+
+Core invariant:
+
+`DISCOVER CAPABILITIES → EXHAUST SAFE READ-ONLY ROUTES → VERIFY CANONICAL CONTENT → LOAD REQUIRED REFERENCES → WORK`
+
+Never infer that Mindway is inaccessible from one failed URL, one unavailable fetch method, one search failure, or an assumption about provider capabilities. If a safe applicable route remains — raw URL, GitHub blob, native GitHub connector/API, browser/web open, search-to-open, or a provenance-verified cache — continue trying it.
+
+Never claim `MINDWAY_LOADED` unless canonical `my.md` plus required `README.md` and `PUBLIC_STANDARD.md` were actually read. Never use model memory as evidence of access.
+
+Only after all safe applicable routes are exhausted may the state become `MINDWAY_BLOCKED`; report attempted routes and observed failures rather than asking the user to paste the file prematurely.
 
 ## Template Runtime — core intent router
 
@@ -139,7 +154,9 @@ This rule applies automatically to every AI, agent, chat, or tool that starts wo
 
 ## When access fails
 
-If this public source cannot be read, say so clearly. Do not pretend Mindway was loaded from memory.
+Do not declare access failure from a single transport failure. Follow the mandatory [Entry Access Gate](skills/entry-access-gate/SKILL.md), exhaust all safe applicable read-only routes, and distinguish route failure from canonical unreachability.
+
+If the canonical public source still cannot be verified after the gate is exhausted, say so clearly, report the attempted routes and evidence, and do not pretend Mindway was loaded from memory.
 
 ## The commands
 
