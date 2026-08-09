@@ -1,7 +1,7 @@
 # Template Registry
 
-Status: REVIEW_READY  
-Version: 0.2.0
+Status: CORE_ACTIVE  
+Version: 1.0.0
 
 | ID | Family | Primary behavior | Typical outputs |
 |---|---|---|---|
@@ -28,17 +28,17 @@ Version: 0.2.0
 For token economy, read in this order:
 1. `REGISTRY.md` — identify possible family.
 2. `ROUTER.md` or `SYSTEM.json` — compose minimum set.
-3. `FAMILIES.md` — read only selected family contracts.
+3. `FAMILIES.md` / `TEMPLATES.md` — read only selected family contracts/skeletons.
 4. relevant design/renderer profile only when needed.
 5. `TESTS.md` only for maintenance/regression/promotion.
 
 ## Composition policy
-Templates are composable. A task may use multiple families but should load only the minimum sufficient set. File format is a renderer/output choice, not a family.
+Templates are composable. A task may use multiple families but must load only the minimum sufficient set. File format is a renderer/output choice, not a family.
 
 ## Override policy
 Locked project or owner-system templates and source truth override generic family defaults for their scope. Design profiles may change expression but not facts, evidence, workflow semantics or approval gates.
 
 ## Lifecycle
-`CANDIDATE → REVIEW_READY → APPROVED/LOCKED → DEPRECATED`
+`CANDIDATE → REVIEW_READY → CORE_ACTIVE/APPROVED → DEPRECATED`
 
-Current system: REVIEW_READY. Approval/locking remains an owner/governance decision.
+Current system: `CORE_ACTIVE` under explicit owner approval after the 1000-case simulation threshold passed. See `BENCHMARK_1000_SIMULATION.md`.
