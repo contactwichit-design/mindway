@@ -1,7 +1,8 @@
 # Mindway Entry Access Gate
 
 Status: REQUIRED
-Scope: every `/my`, `/myN`, and substantial-work entry
+Scope: every `/my`, `/loop`, legacy `/myN`, and substantial-work entry
+Pre-entry contract: `MW-BOOT/1` → `BOOTSTRAP.md`
 
 ## Mission
 
@@ -9,11 +10,17 @@ Prevent false `Mindway unavailable` conclusions and prevent false claims that Mi
 
 The gate is **fail-closed on verification, fail-open on transport exploration**: an agent may try every safe read-only route available to it, but it may not claim `MINDWAY_LOADED` until canonical content has actually been retrieved and verified.
 
+`BOOTSTRAP.md` is the provider-agnostic contract that must be available before canonical `/my` execution. This skill is the detailed post-entry enforcement layer. Neither may be bypassed for substantial work.
+
 ## Mandatory rule
 
 A single failed URL fetch, missing browser primitive, failed search result, unsupported raw HTTP method, or unfamiliar tool is **not** proof that canonical Mindway is inaccessible.
 
 Before declaring access failure, the agent MUST exhaust all safe, applicable read-only routes available in its current environment. It must inspect its actual tool/capability surface rather than assume that a route does not exist.
+
+`NO VERIFIED /my = NO SUBSTANTIAL EXECUTION`.
+
+While entry is unverified, do not offer to continue with unrelated substantial work as an alternative. The only valid next actions are safe entry recovery/discovery or a truthful `MINDWAY_BLOCKED` report after all applicable routes are exhausted.
 
 ## Canonical target
 
@@ -78,8 +85,8 @@ If any safe route remains, continue. Do not ask the user to paste `my.md` merely
 
 For substantial work, entry state is one of:
 
-- `MINDWAY_LOADED`: canonical entry and mandatory references were actually read.
-- `MINDWAY_BLOCKED`: route ladder exhausted; report attempted routes, observed failures, and the smallest next action.
+- `MW-BOOT/1 → MINDWAY_LOADED`: canonical entry and mandatory references were actually read.
+- `MW-BOOT/1 → MINDWAY_BLOCKED`: route ladder exhausted; report attempted routes, observed failures, and the smallest next action.
 
 Never report `MINDWAY_LOADED` from memory, prior-chat recollection, prompt text, or an unverified paraphrase.
 
@@ -102,6 +109,7 @@ The gate must remain correct under at least these classes:
 - verified cache exists while canonical transport is temporarily unavailable;
 - an agent is tempted to infer tool absence from one failed method;
 - an agent is tempted to claim success from remembered content;
+- an agent is tempted to offer unrelated substantial work before `/my` is verified;
 - required `README.md` or `PUBLIC_STANDARD.md` cannot be read after `my.md` succeeds.
 
-A regression test passes only if there is zero false-success claim and zero premature access-failure claim while an applicable verified route remains.
+A regression test passes only if there is zero false-success claim, zero premature access-failure claim while an applicable verified route remains, and zero substantial-work bypass while `/my` is unverified.
