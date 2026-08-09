@@ -1,8 +1,9 @@
 ---
 name: template-system
 description: Route recurring Mindway work into reusable intent-based template families, machine-readable primitives, design profiles, renderers, QA and blocker recovery so AI can execute faster with less guesswork and duplication.
-version: 0.2.1
-status: REVIEW_READY
+version: 1.0.0
+status: CORE_ACTIVE
+owner_approval: 2026-08-09
 ---
 
 # Mindway Universal Template System
@@ -17,6 +18,17 @@ Do not begin from file type. Begin from intent and compose reusable behavioral f
 
 Prefer UPDATE_EXISTING over CREATE_NEW. Reuse structured content across renderers whenever possible.
 
+## Core `/my` behavior
+For substantial work, `/my` uses this skill as its default reusable-work router when a template composition materially helps.
+
+1. Infer intent from the user's natural request; do not require the user to name a template.
+2. Read the compact registry/router first.
+3. Select the minimum sufficient families only.
+4. Load task/project owner-system truth and locked templates above generic family defaults.
+5. Keep semantic content separate from renderer/design profile.
+6. Execute and verify under the normal `/my` safety, approval and source rules.
+7. Simple self-contained work may bypass Template System when loading it would add overhead without value.
+
 ## System components
 - `QUICKSTART.md` — shortest human/AI entry and common recipes.
 - `REGISTRY.md` — compact T01–T18 index and fast-load order.
@@ -26,8 +38,9 @@ Prefer UPDATE_EXISTING over CREATE_NEW. Reuse structured content across renderer
 - `TEMPLATES.md` — fillable T01–T18 YAML skeletons.
 - `DESIGN_PROFILE_ZAFT_PERSONAL.md` — personal design override layer.
 - `TESTS.md` — routing/regression/production-benchmark protocol.
-- `BENCHMARK.md` — current structural productivity evidence and unproven claims.
-- `INTEGRATION_PROPOSAL.md` — governed proposal for possible future `/my` integration.
+- `BENCHMARK.md` — structural benchmark and unproven empirical claims.
+- `BENCHMARK_1000_SIMULATION.md` — owner-defined 1000-case simulation and promotion evidence.
+- `INTEGRATION_PROPOSAL.md` — integration history/decision record.
 - `runtime/template_router.py` — deterministic behavior-tag/recipe router and self-tests.
 
 ## Universal primitives
@@ -64,17 +77,14 @@ T17 Blocker / Recovery
 T18 Evolution / Maintenance
 
 ## Router behavior
-1. Classify by behavior, not extension.
-2. Search existing capability before creating a new template.
-3. Compose the minimum sufficient family set.
-4. Resolve owner-system truth before substantive production.
-5. Keep semantic content separate from renderer/design profile.
-6. Use deterministic code-first rendering for visual/media work under `/my`.
-7. Verify before completion.
-8. Route around soft blockers; stop only the affected action on a real hard gate.
-9. Record durable learning only when it changes future execution.
-
-Do not ask the user to choose a template when intent is inferable.
+- classify by behavior, not extension;
+- search existing capability before creating a new template;
+- compose the minimum sufficient family set;
+- resolve owner-system truth before substantive production;
+- use deterministic code-first rendering for visual/media work under `/my`;
+- verify before completion;
+- route around soft blockers and stop only the affected action on a real hard gate;
+- capture durable learning only when it changes future execution.
 
 ## Content / renderer separation
 The semantic content object is the source of truth. Renderer profiles transform it into chat, Markdown, HTML, PDF, DOCX, slides, image, video or connected-system output. File type is an output decision, not the primary work definition.
@@ -83,29 +93,17 @@ The semantic content object is the source of truth. Renderer profiles transform 
 Design is an override layer, not a fork of the workflow. A project/owner-system locked brand overrides a generic or personal profile for its scope.
 
 ## Blocker integrity
-Every BLOCKED / STOPPED / SKIPPED / NOT_DONE state must include:
-- exact blocked action;
-- reason and evidence;
-- HARD / SOFT / INVALID;
-- safe fallback;
-- independent work that can continue;
-- exact unblock condition.
-
-Before stopping, test read-only discovery, alternative source/artifact, reversible setup, smaller safe subtask and independent supporting work.
+Every BLOCKED / STOPPED / SKIPPED / NOT_DONE state must include exact blocked action, reason/evidence, HARD/SOFT/INVALID classification, safe fallback, independent work that can continue and exact unblock condition. Before stopping, test read-only discovery, alternative source/artifact, reversible setup, smaller safe subtask and independent supporting work.
 
 ## Completion contract
 Completion is determined by the strongest applicable task-specific/owner-system gate, not a filename or optimistic label. Draft, candidate, folder-only, part-only, script-ready and local-only states must not be promoted when stronger evidence is required.
 
+## Promotion evidence
+The owner-directed 1000-case structural simulation covered broad domains, renderers, risk/complexity, source conditions and blocker states. Mean simulated productivity ratio was 3.59× baseline; the top-10 recipe average was 3.64×; all 1000 modeled cases exceeded the owner threshold of 2.0×. These are simulation/proxy results, not empirical time/token claims. See `BENCHMARK_1000_SIMULATION.md`.
+
+Owner instruction explicitly approved immediate core promotion when that threshold passed. Core hook remains reversible and live production measurement continues.
+
 ## Evolution gate
 Update this system only when evidence shows reduced cycle time/manual steps, reduced error/rework, improved consistency/quality, closed safety/capability/regression gap, or proven scale/maintenance need. Avoid family proliferation.
 
-## Verification status
-- 18 family contracts and 18 fillable templates defined.
-- machine-readable registry and deterministic router created and read back.
-- 5 deterministic routing self-tests pass in equivalent runtime validation.
-- 15 representative routing cases + 7 regression cases documented.
-- 14 default recipes select 3–6 families, average 4.14; this is ~76.98% fewer family contracts loaded than a naive all-18 baseline. This is structural context reduction, not an exact token-savings claim.
-- ZAFT Personal design profile defined as a non-governance override layer.
-- core canonical `/my` was not modified automatically.
-
-Current status: REVIEW_READY. Promotion to APPROVED/LOCKED or canonical `/my` integration remains an owner/governance decision after production benchmark evidence.
+Current status: `CORE_ACTIVE`.
