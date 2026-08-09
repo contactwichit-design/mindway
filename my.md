@@ -6,17 +6,20 @@ Contact: hi.mindway@gmail.com
 
 `/my` is the single entry command for Mindway.
 
+Pre-entry bootstrap: `MW-BOOT/1` → [BOOTSTRAP.md](BOOTSTRAP.md)
+
 Before any work:
 
 1. Read this file.
 2. Read [README.md](README.md).
 3. Read [PUBLIC_STANDARD.md](PUBLIC_STANDARD.md).
 4. Pass the mandatory [Entry Access Gate](skills/entry-access-gate/SKILL.md). A single failed transport is never sufficient evidence that Mindway is inaccessible.
-5. Read only the files relevant to the current task.
-6. Protect private, confidential, personal, company, patient, employee, credential, and secret information.
-7. Think independently. Mindway guides reasoning; it does not replace judgment.
-8. Do the work.
-9. At the end, capture only useful, durable learning and avoid duplicate noise.
+5. Confirm `NO VERIFIED /my = NO SUBSTANTIAL EXECUTION`.
+6. Read only the files relevant to the current task.
+7. Protect private, confidential, personal, company, patient, employee, credential, and secret information.
+8. Think independently. Mindway guides reasoning; it does not replace judgment.
+9. Do the work.
+10. At the end, capture only useful, durable learning and avoid duplicate noise.
 
 ## Required behavior
 
@@ -32,6 +35,8 @@ Before any work:
 
 Every `/my`, `/loop`, legacy `/myN`, and substantial-work entry MUST follow [skills/entry-access-gate/SKILL.md](skills/entry-access-gate/SKILL.md).
 
+Before canonical `/my` can be reached, use the provider-agnostic pre-entry contract [BOOTSTRAP.md](BOOTSTRAP.md), protocol `MW-BOOT/1`. It exists specifically to prevent an AI from concluding that Mindway is unavailable merely because its first transport fails. Once `/my` is verified, canonical Mindway governs and the bootstrap contract may not override it.
+
 Core invariant:
 
 `DISCOVER CAPABILITIES → EXHAUST SAFE READ-ONLY ROUTES → VERIFY CANONICAL CONTENT → LOAD REQUIRED REFERENCES → WORK`
@@ -41,6 +46,8 @@ Never infer that Mindway is inaccessible from one failed URL, one unavailable fe
 Never claim `MINDWAY_LOADED` unless canonical `my.md` plus required `README.md` and `PUBLIC_STANDARD.md` were actually read. Never use model memory as evidence of access.
 
 Only after all safe applicable routes are exhausted may the state become `MINDWAY_BLOCKED`; report attempted routes and observed failures rather than asking the user to paste the file prematurely.
+
+Never offer to bypass `/my` and begin unrelated substantial work while canonical entry remains unverified. `NO VERIFIED /my = NO SUBSTANTIAL EXECUTION`.
 
 ## Template Runtime — core intent router
 
@@ -178,9 +185,11 @@ This rule applies automatically to every AI, agent, chat, or tool that starts wo
 
 ## When access fails
 
-Do not declare access failure from a single transport failure. Follow the mandatory [Entry Access Gate](skills/entry-access-gate/SKILL.md), exhaust all safe applicable read-only routes, and distinguish route failure from canonical unreachability.
+Do not declare access failure from a single transport failure. Follow the pre-entry `MW-BOOT/1` contract in [BOOTSTRAP.md](BOOTSTRAP.md) and the mandatory [Entry Access Gate](skills/entry-access-gate/SKILL.md), exhaust all safe applicable read-only routes, and distinguish route failure from canonical unreachability.
 
 If the canonical public source still cannot be verified after the gate is exhausted, say so clearly, report the attempted routes and evidence, and do not pretend Mindway was loaded from memory.
+
+Do not offer to bypass `/my` and begin unrelated substantial work while canonical entry is unverified.
 
 ## The commands
 
