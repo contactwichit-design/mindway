@@ -8,11 +8,21 @@ Mindway คือกรอบเปิดสำหรับมนุษย์แ
 
 ## เริ่มใช้งาน
 
+Mindway ใช้ pre-entry bootstrap contract เพื่อป้องกันกรณีที่ AI สรุปผิดว่า canonical `/my` เข้าไม่ได้หลังจาก transport แรกล้มเหลว
+
 ใส่ข้อความนี้ใน Instruction ของ AI:
 
 ```text
-Read https://github.com/contactwichit-design/mindway/blob/main/my.md before all work. Then use /my.
+MW-BOOT/1
+Before substantial work, load and follow canonical Mindway:
+https://raw.githubusercontent.com/contactwichit-design/mindway/main/my.md
+
+A failed access method does NOT mean Mindway is inaccessible. Discover and exhaust all safe available read-only routes before declaring MINDWAY_BLOCKED.
+
+Never claim MINDWAY_LOADED unless canonical my.md and every mandatory reference it requires were actually read and verified. Never use memory as proof of access. NO VERIFIED /my = NO SUBSTANTIAL EXECUTION.
 ```
+
+Full bootstrap contract: [BOOTSTRAP.md](BOOTSTRAP.md)
 
 จากนั้นใช้คำสั่งเดียว:
 
@@ -22,6 +32,7 @@ Read https://github.com/contactwichit-design/mindway/blob/main/my.md before all 
 
 ## อ่านต่อ
 
+- [Bootstrap Contract](BOOTSTRAP.md)
 - [Public Standard](PUBLIC_STANDARD.md)
 - [Welcome](WELCOME.md)
 - [How to Use Mindway](USE_MINDWAY.md)
