@@ -1,0 +1,24 @@
+name: Mindway Runtime Tests
+on:
+  push:
+    paths:
+      - 'runtime/**'
+      - 'skills/loop/**'
+      - '.github/workflows/runtime-tests.yml'
+  pull_request:
+    paths:
+      - 'runtime/**'
+      - 'skills/loop/**'
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile runtime
+        run: python -m compileall -q runtime
+      - name: Loop runtime regression
+        working-directory: runtime
+        run: python -m unittest -v test_loop_runtime.py
