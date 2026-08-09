@@ -30,7 +30,7 @@ Before any work:
 
 ## Entry Access Gate — mandatory fail-closed verification
 
-Every `/my`, `/myN`, and substantial-work entry MUST follow [skills/entry-access-gate/SKILL.md](skills/entry-access-gate/SKILL.md).
+Every `/my`, `/loop`, legacy `/myN`, and substantial-work entry MUST follow [skills/entry-access-gate/SKILL.md](skills/entry-access-gate/SKILL.md).
 
 Core invariant:
 
@@ -61,51 +61,61 @@ Rules:
 
 Core Template Runtime: [skills/template-system/SKILL.md](skills/template-system/SKILL.md)
 
-## Execution Loop — `/myN`
+## Unified Execution Runtime — `/loop`
 
-Mindway supports bounded continuation syntax `/myN`, where `N` is an integer from 1 to 99.
+`/loop` is Mindway's primary execution-control command for substantial work. It combines planning, useful-cycle budgeting, execution topology, bounded continuation, verification, targeted repair, checkpoint/resume, and hard-blocker handling.
 
-Examples: `/my1`, `/my10`, `/my50`, `/my99`.
+Invocation:
 
-`/myN` means: perform up to N useful Mindway execution cycles for the current task before declaring the run complete, subject to safety, approval, tool, context, token, runtime, and platform limits.
+- `/loop` — infer an appropriate useful-cycle budget and execute immediately.
+- `/loop N` or `/loopN` — execute up to N useful cycles, where N is 1..99.
+- `/loop plan` — planning only.
+- `/loop resume <run_id>` — resume a persisted compatible checkpoint when accessible.
 
-A cycle is a meaningful unit of progress, not one tool call and not one chat message. Each cycle follows:
+Core runtime graph:
 
-`ORIENT → EXECUTE → VERIFY → RECORD → DECIDE`
+`MISSION → ORIENT → PLAN → EXECUTE → VERIFY → [FIX → VERIFY]* → RECORD → DECIDE → COMPLETE | CHECKPOINT | STOP`
 
-Before another cycle, preserve the original mission, re-orient against canonical Mindway and current run state, then continue from the highest-value unfinished action. Re-read the canonical source when access is available and the read is materially useful; when a verified unchanged version/hash is available, do not waste cycles repeatedly downloading identical content.
+A cycle is meaningful progress, not one tool call and not one chat message. The original mission and hard constraints must survive every cycle.
 
-The agent must not stop merely because one subtask or tool call finished. It stops when the task is verified complete, the requested useful-cycle budget is exhausted, a real user/approval gate is reached, execution is blocked, a platform boundary is reached, or another cycle would add no meaningful value.
+The agent must not stop merely because one subtask or tool call finished. Before declaring `BLOCKED`, it must test safe fallback routes, reversible/read-only continuation, alternative sources/tools, and independent workstreams. A blocked branch does not automatically block the whole mission.
 
-If the task completes before N, stop early and report that unused cycles were unnecessary. Never perform meaningless repetition to consume the requested number.
+When verification fails and the issue is repairable, return to targeted repair and then verify again. Preserve successful independent work instead of restarting everything. Before repeating external side effects, check idempotency and whether the prior operation may already have succeeded.
 
-Ordinary chat cannot autonomously send itself a new assistant turn after the final response without an external orchestrator or new trigger. `/myN` therefore governs continuation inside the active execution opportunity and requires a resumable checkpoint if a platform boundary interrupts unfinished work. Never claim autonomous post-final continuation unless an actual supporting orchestrator exists.
+Checkpoint when a platform boundary, cycle limit, or external dependency interrupts unfinished work. Resume by re-entering canonical `/my`, validating checkpoint compatibility/integrity, and continuing from the highest-value unfinished safe action.
 
-Full runtime rules: [skills/execution-loop/SKILL.md](skills/execution-loop/SKILL.md)
+Ordinary chat cannot autonomously send itself a new assistant turn after the final response without a real orchestrator or scheduler. `/loop` governs continuation inside the active execution opportunity and supports resumable state across real supporting runtimes; never claim background continuation that did not occur.
 
-## `/fy` — execution planner
+Full runtime rules: [skills/loop/SKILL.md](skills/loop/SKILL.md)
 
-`/fy` estimates the useful `/myN` budget and chooses how the work should run.
+Runtime contracts:
 
-It evaluates scope, discovery load, execution depth, QC/risk, iteration uncertainty, external systems, batch size, and available runtimes, then chooses:
+- [runtime/loop_runtime.py](runtime/loop_runtime.py)
+- [runtime/schemas/mindway_event.schema.json](runtime/schemas/mindway_event.schema.json)
+- [runtime/schemas/mindway_run.schema.json](runtime/schemas/mindway_run.schema.json)
 
-- `SEQUENTIAL` — one path with bounded continuation;
-- `PARALLEL` — independent workstreams run concurrently when supported;
-- `HYBRID` — fan-out specialist work followed by synthesis, critique, repair, and independent verification.
+### Compatibility aliases
 
-It returns a recommended `/myN`, range, topology, worker count, workstreams, execution graph, QC path, confidence, and stop gates.
+During migration, existing commands remain valid aliases:
 
-One cycle means one meaningful agent execution unit. Parallel cycles may execute concurrently when an actual orchestrator supports it.
+- `/fy` → `/loop plan`
+- `/myN` → `/loop N`
+- `/fyn` or other private aliases may map to `/loop` only when their prior semantics are known; never invent compatibility.
 
-Full planner rules: [skills/fy/SKILL.md](skills/fy/SKILL.md)
+Do not delete legacy runtime files until compatibility/regression evidence supports removal. New documentation and new workflows should prefer `/loop`.
+
+Legacy references:
+
+- [skills/execution-loop/SKILL.md](skills/execution-loop/SKILL.md)
+- [skills/fy/SKILL.md](skills/fy/SKILL.md)
 
 ## Swarm Runtime — adaptive multi-agent execution
 
-When `/fy` determines that multiple independent perspectives or workstreams materially improve the result, use Mindway Swarm Runtime.
+When `/loop` planning determines that multiple independent perspectives or workstreams materially improve the result, use Mindway Swarm Runtime when an actual orchestrator supports it.
 
 Default substantial-work pattern:
 
-`MISSION → /fy → DECOMPOSE → SPECIALIST WORKERS → SHARED RUN BOARD → CRITIC → SYNTHESIZER → FIXER → INDEPENDENT VERIFIER → RELEASE`
+`MISSION → /loop → DECOMPOSE → SPECIALIST WORKERS → SHARED RUN BOARD → CRITIC → SYNTHESIZER → FIXER → INDEPENDENT VERIFIER → RELEASE`
 
 Key rules:
 
@@ -128,6 +138,20 @@ Provider-agnostic external runner reference:
 - [runtime/swarm.example.json](runtime/swarm.example.json)
 
 The external runner can invoke configured AI CLI processes concurrently, persist a run board/checkpoints, synthesize results, critique, repair, verify, and resume interrupted runs. It intentionally contains no credentials and does not require one AI vendor.
+
+## Knowledge Stock — durable external learning
+
+When external websites, repositories, documents, experiments, or observed failures produce reusable knowledge, use [skills/knowledge-stock/SKILL.md](skills/knowledge-stock/SKILL.md).
+
+Keep read depth explicit (`READ_FULL`, `READ_DEEP`, `INDEX_ONLY`, `NOT_YET_READ`, `READ_SUMMARY`) and separate source-derived facts from Mindway adaptation proposals. Retain useful material as `USE_NOW`, `KNOWLEDGE`, `STOCK`, or `QUEUE`; never treat discovery as proof that a page was read.
+
+Reusable skills should progress through a maturity lifecycle rather than moving directly into active protocol merely because they look promising.
+
+## Observability Graph — inspect runtime, do not invent it
+
+For Mindway Observatory, execution replay, dependency analysis, failure tracing, or bottleneck analysis, use [skills/observability-graph/SKILL.md](skills/observability-graph/SKILL.md).
+
+Observatory views are derived from normalized runtime state/events. Minimum synchronized views are Universe Graph, Run Timeline, and Inspector. Use progressive disclosure and adaptive detail instead of displaying every node/event at once. Visualization must not invent causality unsupported by underlying events.
 
 ## Graphic Runtime — mandatory for `/my`
 
@@ -162,10 +186,14 @@ If the canonical public source still cannot be verified after the gate is exhaus
 
 ```text
 /my
+/loop
+/loop1 ... /loop99
+/loop plan
+/loop resume <run_id>
+
+# compatibility aliases
 /my1 ... /my99
 /fy
 ```
 
-`/my` remains the default human-facing entry. `/myN` is its bounded execution-loop form, and `/fy` is its adaptive execution planner.
-
-Compatibility note: other commands may exist in private extensions.
+`/my` remains the mandatory entry. `/loop` is the primary execution controller. Legacy `/myN` and `/fy` remain compatibility aliases during migration.
