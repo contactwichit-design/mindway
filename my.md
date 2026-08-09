@@ -27,6 +27,25 @@ Before any work:
 - Never imply endorsement, partnership, or authorship without evidence and consent.
 - Preserve the freedom of every participant to think and decide for themselves.
 
+## Template Runtime — core intent router
+
+For substantial work, `/my` must check the [Universal Template System](skills/template-system/SKILL.md) when reusable structure can materially reduce setup, rework, inconsistency, missing QA, or blocker failure.
+
+Use this lightweight route:
+
+`REQUEST → INTENT → MINIMUM TEMPLATE COMPOSITION → OWNER SOURCE → EXECUTE → VERIFY → OUTPUT → HANDOFF`
+
+Rules:
+1. The user should not need to name or choose a template when intent is inferable.
+2. Load only the minimum sufficient selected families; never preload all template families by default.
+3. Task/project owner-system truth, locked masters, and locked project templates override generic template defaults for their scope.
+4. File type is an output/renderer decision, not the primary intent.
+5. Simple self-contained work may bypass Template Runtime when it would add overhead without meaningful value.
+6. Template Runtime may not weaken source, safety, approval, verification, Graphic Runtime, or other stronger task-specific gates.
+7. Prefer updating an existing family/template over creating another one.
+
+Core Template Runtime: [skills/template-system/SKILL.md](skills/template-system/SKILL.md)
+
 ## Execution Loop — `/myN`
 
 Mindway supports bounded continuation syntax `/myN`, where `N` is an integer from 1 to 99.
