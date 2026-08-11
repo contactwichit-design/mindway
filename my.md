@@ -146,6 +146,37 @@ Provider-agnostic external runner reference:
 
 The external runner can invoke configured AI CLI processes concurrently, persist a run board/checkpoints, synthesize results, critique, repair, verify, and resume interrupted runs. It intentionally contains no credentials and does not require one AI vendor.
 
+## Multi-AI Studio OS — backward-compatible quality layer
+
+Mindway may coordinate multiple AI models, local workers, tools, analyzers, and specialist judges through a shared public Studio OS contract. This layer extends the existing `/loop`, Swarm Runtime, project workspaces, and private profiles; it does not replace or invalidate compatible existing workflows.
+
+Core model:
+
+`MINDWAY PUBLIC CORE → WORKSPACE / PRIVATE PROFILE → CAPABILITY REGISTRY → ROUTER → MAKER → ARTIFACT + TRACE → EVIDENCE EXTRACTION → DETERMINISTIC CHECKS + SPECIALIST JUDGES + SOURCE/STD CHECK → DEFECT GRAPH → REPAIR → VERIFY → PROMOTION GATE → REVIEW_READY → HUMAN APPROVAL`
+
+Rules:
+
+1. Build quality judgment before blindly increasing generation capacity. Technical validity is evidence of execution, not proof of review quality.
+2. `TECH_VALID` MUST NOT be treated as `REVIEW_READY`. No worker may promote its own artifact across a stronger quality or approval gate merely because rendering, parsing, tests, or transport succeeded.
+3. Analyzer decisions must be evidence-first. Prefer the contract `OBSERVATION → EVIDENCE → RULE → DEFECT → SEVERITY → REPAIR → CONFIDENCE` over unexplained scalar scores.
+4. Deterministic measurements and source-fidelity checks should be used wherever possible; model judges complement evidence and do not replace it.
+5. The maker should not be the sole judge of its own work. Use independent verification when materially useful and available.
+6. Analyzer/judge quality must itself be measurable and calibratable against verified human decisions or other trustworthy ground truth. Track false passes, false rejects, localization accuracy, repair success, and human override when applicable.
+7. Route work by required capability, privacy, authority, tool access, cost/risk, and verified performance rather than hard-coding one model name. Model/provider identity is replaceable implementation detail unless the task specifically requires it.
+8. Use a Maker → Critic/Analyzer → Repair → Verify loop for repairable defects. Preserve successful independent work rather than regenerating everything by default.
+9. Public core MUST NOT depend on private profiles. Private workspaces may extend public contracts with local standards, brand rules, domain locks, and confidential sources while keeping protected information out of the public core.
+10. Human or owner approval remains authoritative for final, taste, brand, clinical, business, publishing, destructive, permission, or other high-impact gates as defined by the applicable workspace.
+11. Existing B2, LMS, ZAFT, PLUS, Qwen, Codex, and other compatible workflows continue operating during migration. Prefer additive adapters, aliases, schemas, and regression tests over breaking replacement.
+12. Do not force every task through a heavy multi-AI studio path. Simple or already-safe workflows may continue unchanged when the Studio layer would add cost without meaningful quality or risk reduction.
+13. Reusable winning methods may enter Knowledge Stock / Skill Stock only with provenance and appropriate verification. Failures may be retained as sanitized learning cases without leaking protected data.
+14. Studio implementations must preserve Mindway's existing mission, source, privacy, evidence, checkpoint, approval, and compatibility rules. If a Studio rule conflicts with canonical Mindway, canonical Mindway wins.
+
+Recommended promotion vocabulary for Studio artifacts:
+
+`CREATED → TECH_VALID → ANALYZED → REPAIR_REQUIRED | QA_PASS → REVIEW_READY → HUMAN_APPROVED → FINAL_READY`
+
+Workspace-specific status vocabularies may remain in use. They must be mapped explicitly rather than silently redefined.
+
 ## Knowledge Stock — durable external learning
 
 When external websites, repositories, documents, experiments, or observed failures produce reusable knowledge, use [skills/knowledge-stock/SKILL.md](skills/knowledge-stock/SKILL.md).
@@ -189,7 +220,7 @@ Do not declare access failure from a single transport failure. Follow the pre-en
 
 If the canonical public source still cannot be verified after the gate is exhausted, say so clearly, report the attempted routes and evidence, and do not pretend Mindway was loaded from memory.
 
-Do not offer to bypass `/my` and begin unrelated substantial work while canonical entry is unverified.
+Do not offer to bypass `/my` and begin unrelated substantial work while canonical entry remains unverified.
 
 ## The commands
 
