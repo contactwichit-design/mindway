@@ -1,29 +1,20 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://mindway.example/schemas/mindway_run.schema.json",
-  "title": "Mindway Run Ledger",
-  "type": "object",
-  "required": ["schema_version","run_id","mission","state","completed_cycles","created_at","updated_at","completed","next_action","risks","artifacts"],
-  "properties": {
-    "schema_version": {"const": "1.0"},
-    "run_id": {"type": "string", "minLength": 1},
-    "mission": {"type": "string", "minLength": 1},
-    "state": {"type": "string", "enum": ["NEW","ORIENTING","PLANNED","RUNNING","VERIFYING","FIXING","CHECKPOINTED","COMPLETE","NEED_USER","BLOCKED","PLATFORM_LIMIT","CYCLE_LIMIT","FAILED"]},
-    "topology": {"type": ["string","null"], "enum": ["SEQUENTIAL","PARALLEL","HYBRID",null]},
-    "requested_cycles": {"type": ["integer","null"], "minimum": 1, "maximum": 99},
-    "estimated_cycles": {"type": ["integer","null"], "minimum": 1, "maximum": 99},
-    "completed_cycles": {"type": "integer", "minimum": 0},
-    "created_at": {"type": "string", "format": "date-time"},
-    "updated_at": {"type": "string", "format": "date-time"},
-    "completed": {"type": "array", "items": {"type": "object", "required": ["item"], "properties": {"item": {"type": "string"}, "evidence": {"type": "array", "items": {"type": "string"}}}, "additionalProperties": false},
-    "blocked_branches": {"type": "array", "items": {"type": "object", "required": ["item","reason","next_action"], "properties": {"item":{"type":"string"},"reason":{"type":"string"},"evidence":{"type":"array","items":{"type":"string"}},"next_action":{"type":"string"}}, "additionalProperties": false}},
-    "next_action": {"type": ["string","null"]},
-    "risks": {"type": "array", "items": {"type": "string"}},
-    "approval_gates": {"type": "array", "items": {"type": "string"}},
-    "source_versions": {"type": "object", "additionalProperties": {"type": "string"}},
-    "artifacts": {"type": "array", "items": {"type": "string"}},
-    "checkpoint": {"type": ["object","null"], "properties": {"uri":{"type":"string"},"checksum":{"type":"string"},"saved_at":{"type":"string","format":"date-time"}}, "required":["uri","saved_at"], "additionalProperties": false},
-    "stop_reason": {"type": ["string","null"]}
-  },
-  "additionalProperties": false
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"https://mindway.example/schemas/mindway_run.schema.json",
+  "title":"Mindway Run Ledger v2",
+  "type":"object",
+  "required":["schema_version","run_id","mission","state","completed_cycles","created_at","updated_at","completed","open_failures","semantic_snapshot","artifacts"],
+  "properties":{
+    "schema_version":{"const":"2.0"},
+    "run_id":{"type":"string","minLength":1},"mission":{"type":"string","minLength":1},
+    "state":{"type":"string","enum":["NEW","ORIENTING","PLANNED","RUNNING","VERIFYING","FIXING","CHECKPOINTED","COMPLETE","NEED_USER","BLOCKED","PLATFORM_LIMIT","CYCLE_LIMIT","FAILED"]},
+    "topology":{"type":["string","null"],"enum":["SEQUENTIAL","PARALLEL","HYBRID",null]},
+    "requested_cycles":{"type":["integer","null"],"minimum":1,"maximum":99},"estimated_cycles":{"type":["integer","null"],"minimum":1,"maximum":99},"completed_cycles":{"type":"integer","minimum":0},
+    "created_at":{"type":"string","format":"date-time"},"updated_at":{"type":"string","format":"date-time"},
+    "completed":{"type":"array"},"blocked_branches":{"type":"array"},"next_action":{"type":["string","null"]},"risks":{"type":"array","items":{"type":"string"}},
+    "approval_gates":{"type":"array","items":{"type":"string"}},"validated_approvals":{"type":"array","items":{"type":"string"}},
+    "source_versions":{"type":"object","additionalProperties":{"type":"string"}},"semantic_snapshot":{"type":"object","additionalProperties":{"type":"string"}},
+    "open_failures":{"type":"array","items":{"type":"object","required":["id","failure_class","scope","severity","mission_relevant","state"],"properties":{"id":{"type":"string"},"failure_class":{"type":"string"},"scope":{"type":"string"},"severity":{"type":"string","enum":["S0","S1","S2","S3","S4"]},"mission_relevant":{"type":"boolean"},"state":{"type":"string"}},"additionalProperties":true}},
+    "artifacts":{"type":"array","items":{"type":"string"}},"checkpoint":{"type":["object","null"]},"stop_reason":{"type":["string","null"]}
+  },"additionalProperties":false
 }
