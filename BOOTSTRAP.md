@@ -45,6 +45,15 @@ Use whichever routes actually exist in the current provider/runtime. Continue un
 
 A route may be skipped only when that capability is genuinely unavailable. Failure of one route means `ROUTE_FAILED`, not `MINDWAY_BLOCKED`.
 
+## Freshness and cache safety
+
+Canonical identity and canonical freshness are related but different checks.
+
+- A successful cache-prone route must not automatically outrank stronger current-repository evidence when that evidence is available.
+- When a native GitHub/repository/API route can expose the current `main` blob SHA, commit, ETag, revision, or equivalent evidence, use it to confirm that browser/search/cache content is not stale before declaring a fresh load.
+- If stronger freshness evidence is unavailable, do not fail entry merely because the provider only exposes a canonical web/raw route. Verify the strongest provenance available and report a cached or freshness-limited state only when there is actual evidence of staleness or cache uncertainty that matters to the task.
+- A known stale copy is not proof of current canonical state. Continue the route ladder when a fresher safe route exists.
+
 ## Required handshake
 
 Before substantial work, the runtime must reach one of these states:
