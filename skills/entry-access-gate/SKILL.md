@@ -57,6 +57,14 @@ Do not use model memory as a transport route.
 
 When a native connector exposes a blob SHA, commit, ETag, modified revision, or equivalent version evidence, record it when useful.
 
+### Freshness check
+
+Do not confuse a canonical-looking cached copy with current canonical state when stronger freshness evidence is available.
+
+- If a browser, search, proxy, or cache route succeeds and a native GitHub/repository/API route is also available, prefer the native route for current `main` version evidence and reconcile material differences before declaring a fresh load.
+- If a known stale or older revision is returned, classify it as `CONTENT_STALE` and continue to a fresher safe route.
+- If no stronger freshness primitive exists, do not invent one and do not fail a valid canonical route merely for lacking a SHA. Use the strongest available provenance and state any material freshness limitation honestly.
+
 ## Failure classification
 
 Never collapse these into one generic `cannot access` statement:
@@ -64,6 +72,7 @@ Never collapse these into one generic `cannot access` statement:
 - `ROUTE_UNAVAILABLE`: a particular transport/tool is absent.
 - `ROUTE_FAILED`: a transport exists but the attempt failed.
 - `CONTENT_UNVERIFIED`: content was returned but canonical identity cannot be established.
+- `CONTENT_STALE`: canonical provenance is plausible or known, but evidence shows the content is not the current revision and a fresher safe route should be tried.
 - `CANONICAL_UNREACHABLE`: every safe applicable route was exhausted and none produced verified canonical content.
 
 Only `CANONICAL_UNREACHABLE` permits the agent to say canonical Mindway cannot currently be accessed.
@@ -107,6 +116,7 @@ The gate must remain correct under at least these classes:
 - every network route fails;
 - only stale/unverified cache exists;
 - verified cache exists while canonical transport is temporarily unavailable;
+- cache-prone content disagrees materially with a fresher native repository revision;
 - an agent is tempted to infer tool absence from one failed method;
 - an agent is tempted to claim success from remembered content;
 - an agent is tempted to offer unrelated substantial work before `/my` is verified;

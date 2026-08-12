@@ -1,0 +1,15 @@
+# Canonical Mindway core ownership
+# Keep entry/runtime governance changes visible to the repository owner.
+/my.md @contactwichit-design
+/BOOTSTRAP.md @contactwichit-design
+/README.md @contactwichit-design
+/PUBLIC_STANDARD.md @contactwichit-design
+/INVARIANTS.md @contactwichit-design
+/ARCHITECTURE.md @contactwichit-design
+/skills/entry-access-gate/ @contactwichit-design
+/skills/loop/ @contactwichit-design
+/skills/fy/ @contactwichit-design
+/skills/execution-loop/ @contactwichit-design
+/runtime/ @contactwichit-design
+/.github/workflows/runtime-tests.yml @contactwichit-design
+/.github/CODEOWNERS @contactwichit-design
