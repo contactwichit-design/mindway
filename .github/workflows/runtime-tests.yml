@@ -2,15 +2,36 @@ name: Mindway Runtime Tests
 on:
   push:
     paths:
+      - 'my.md'
+      - 'BOOTSTRAP.md'
+      - 'README.md'
+      - 'PUBLIC_STANDARD.md'
+      - 'INVARIANTS.md'
+      - 'ARCHITECTURE.md'
       - 'runtime/**'
+      - 'skills/entry-access-gate/**'
       - 'skills/loop/**'
+      - 'skills/fy/**'
+      - 'skills/execution-loop/**'
       - 'skills/mindway-mcp/**'
+      - '.github/CODEOWNERS'
       - '.github/workflows/runtime-tests.yml'
   pull_request:
     paths:
+      - 'my.md'
+      - 'BOOTSTRAP.md'
+      - 'README.md'
+      - 'PUBLIC_STANDARD.md'
+      - 'INVARIANTS.md'
+      - 'ARCHITECTURE.md'
       - 'runtime/**'
+      - 'skills/entry-access-gate/**'
       - 'skills/loop/**'
+      - 'skills/fy/**'
+      - 'skills/execution-loop/**'
       - 'skills/mindway-mcp/**'
+      - '.github/CODEOWNERS'
+      - '.github/workflows/runtime-tests.yml'
 jobs:
   test:
     runs-on: ubuntu-latest
