@@ -1,6 +1,6 @@
 # Mindway Public Standard
 
-Version: 0.1
+Version: 0.2
 Status: Public Foundation
 Steward: zaft (ZF)
 
@@ -27,6 +27,19 @@ Before acting, pause briefly and identify:
 - Prefer updating over duplication.
 - Keep changes reversible when possible.
 - Ask for approval before publishing, deleting, transferring rights, exposing data, or making high-impact decisions.
+
+## Visual-media delivery gate
+
+For video, motion, presentation, graphic, or other learner-facing visual-media work, the final delivery check MUST verify story-media fit, not only technical rendering.
+
+- **Preserve the owner-locked story spine.** When an existing clip, deck, or lesson has a storyline, progression, or learning beat the owner has explicitly chosen to preserve, do not remove, compress away, reorder, or replace those beats without explicit approval. Improve by clarifying, extending, adding motion, adding supporting media, improving pacing, or repairing defects while keeping the locked story intact.
+- **Every visual must match the current point.** Each image, video, graphic, animation, screenshot, diagram, or supporting asset must materially support the narration, script, learning beat, or decision being explained at that moment. A technically valid but semantically mismatched visual is a delivery defect.
+- **Replace mismatched media before delivery.** If an existing image or asset does not fit the point being taught, replace it with a more relevant existing asset or create/code a supporting visual. Do not keep a weak or unrelated image merely because it already exists.
+- **Reuse before regenerate when the fit is good.** Prefer current, approved, reusable media when it supports the story accurately. Create new HTML/CSS/JS/SVG motion, diagrams, labels, highlights, or supporting assets only where they improve understanding or fill a genuine visual gap.
+- **Funny / light-humor supporting sets are allowed when useful.** A funny, playful, or light visual may be inserted when it improves attention, memory, pacing, or emotional relief and still fits the learning point, audience, and brand. Humor must never distort the fact being taught, distract from the learning objective, expose private information, or trivialize clinical safety, emergency, serious patient issues, privacy, consent, or other high-risk content.
+- **Final pre-delivery inspection is mandatory.** Before sending a learner-facing clip or visual artifact, inspect the critical/representative frames or scenes and confirm: story progression preserved when locked; media matches the narration/learning point; no misleading or stale visual remains; text/readability and Thai/Unicode are correct; sensitive information is protected; and the visual treatment supports rather than competes with learning.
+
+A media artifact is not `REVIEW_READY` merely because it rendered, encoded, uploaded, or played successfully. Visual-story fit is part of the quality gate.
 
 ## Departure
 
