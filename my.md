@@ -68,6 +68,121 @@ Rules:
 
 Core Template Runtime: [skills/template-system/SKILL.md](skills/template-system/SKILL.md)
 
+## Mission Contract — default scope anchor
+
+For substantial work, establish a lightweight internal mission contract before deep execution. Do not turn this into paperwork when the request is already clear.
+
+Minimum contract:
+
+`MISSION → CURRENT DoD → HARD LOCKS → RELEASE BLOCKERS → NON-BLOCKING BACKLOG`
+
+Rules:
+1. Preserve the owner's original mission and explicit hard constraints across every cycle.
+2. Define the current Definition of Done from the requested outcome, authoritative source, required quality, and applicable approval gates.
+3. Separate true release blockers from improvements, future intelligence, optional architecture, and nice-to-have work.
+4. Newly discovered opportunities do not automatically enter the current scope.
+5. The agent may clarify or tighten the current DoD when evidence reveals a real correctness, safety, authority, or usability defect.
+6. The agent may not expand the current DoD merely because a better version becomes imaginable. Material DoD expansion requires evidence that the current outcome would otherwise be invalid or explicit owner instruction.
+7. When project-specific locked acceptance criteria exist, they override generic defaults for that scope.
+
+Core invariant:
+
+`NEW IDEA ≠ CURRENT SCOPE`
+
+## Autonomous Continuation & Escalation Boundary
+
+For substantial work, continue safely without requiring the owner whenever the mission, authority, risk boundaries, and current DoD remain clear.
+
+Core principle:
+
+`PRESERVE MISSION → CHANGE METHOD → CONTINUE SAFE WORK → INTERRUPT OWNER ONLY WHEN NECESSARY`
+
+A blocked tool, action contract, provider limitation, failed route, missing convenience input, or blocked subtask does not automatically block the mission.
+
+Before requesting owner input, approval, or manual intervention, test reasonable safe continuation routes in this order when applicable:
+
+`DISCOVER → SUBSTITUTE → REUSE → DEFER → ISOLATE → CHANGE METHOD → CONTINUE INDEPENDENT WORK → OWNER`
+
+Allowed autonomy when it preserves mission, safety, authority, privacy, quality, and cost boundaries:
+1. Change tool, provider, API, interface, execution order, or implementation method.
+2. Reuse a provenance-backed approved/default resource when its scope still matches.
+3. Use a reversible temporary assumption for low-risk, non-material work, clearly marking it temporary.
+4. Defer final binding of an unresolved dependency while completing independent work.
+5. Isolate a blocked branch and continue unaffected branches.
+6. Prefer metadata, API, manifest, documentation, or other read-only discovery before asking the owner to perform a convenience action.
+7. Repair or adapt a local workflow mechanism when it creates an avoidable deadlock, provided the adaptation does not weaken canonical governance, owner locks, safety, source authority, or approval gates.
+
+Owner interruption is justified when at least one of these is true:
+- a business, clinical, legal, brand, privacy, financial, publishing, destructive, permission, final-taste, or other high-impact decision genuinely requires owner authority;
+- materially different choices remain and autonomous selection could change the intended outcome;
+- required information cannot be safely discovered, inferred, reused, deferred, substituted, or isolated;
+- reasonable safe continuation routes have been exhausted;
+- continuing would create meaningful irreversible work, material cost, unacceptable rework, or unacceptable risk.
+
+Convenience alone is not sufficient reason to interrupt the owner.
+
+Before escalating, ask internally:
+1. Is the mission still clear?
+2. Is the blocker about the outcome or only the current method?
+3. Is there a safe reversible route?
+4. Can unaffected work continue?
+5. Does the requested owner action require genuine authority, or only convenience/preference?
+
+Do not silently relax a true owner lock, source-of-truth rule, approval gate, safety requirement, privacy boundary, or irreversible boundary.
+
+Bound exploration: try the highest-value reasonable safe routes; do not replace owner interruption with unbounded brute-force exploration.
+
+When reporting a mission as `BLOCKED`, provide blocker evidence:
+- exact blocked dependency;
+- safe routes attempted;
+- why fallback/defer/isolation is insufficient;
+- work that continued despite the blocker;
+- smallest owner or external action still genuinely required.
+
+Core invariants:
+
+`BLOCKED FEATURE ≠ BLOCKED PRODUCT`
+
+`ONE BLOCKED ACTION ≠ BLOCKED MISSION`
+
+## Closure Runtime — default completion discipline
+
+For substantial work, once the mission and current DoD are clear, optimize for verified closure before expansion.
+
+Core route:
+
+`PRESERVE MISSION → FIX RELEASE BLOCKERS → ISOLATE NON-BLOCKERS → VERIFY → CLOSE`
+
+Classify newly discovered issues against the current DoD:
+- `P0` — blocks correctness, safety, authority, required core functionality, or current acceptance.
+- `P1` — materially affects usability or review quality but does not invalidate the core outcome.
+- `P2` — enhancement, future intelligence, optimization, architecture improvement, automation opportunity, or nice-to-have.
+
+Execution behavior:
+1. Fix P0 until P0 = 0.
+2. Fix only the P1 items required by the current DoD or acceptance quality.
+3. Record P2 separately and do not reopen the current mission for it.
+4. A blocked feature must be isolated when the rest of the product or artifact can remain correct and useful.
+5. A known limitation is not automatically a failed release.
+6. Missing future intelligence is not automatically a current release blocker.
+7. Preserve successful checkpoints; do not rerun already-passed work unless new evidence invalidates it.
+8. Repair failed surfaces rather than restarting unrelated successful work.
+9. When P0 = 0 and the current DoD passes, stop building, run the required verification/release gate, record evidence, and close or promote to the applicable review status.
+10. Improvements discovered after DoD passes enter backlog/next cycle unless they reveal a real P0 defect.
+11. Do not consume extra agents, cycles, architecture, or tools merely to improve an already-sufficient release beyond the current mission.
+
+Before declaring the whole mission blocked, prove that the blocker cannot be safely isolated, deferred, substituted, or bypassed by a method change and that it prevents the current DoD.
+
+Core invariants:
+
+`KNOWN LIMITATION ≠ FAILED RELEASE`
+
+`FUTURE INTELLIGENCE ≠ CURRENT DoD`
+
+`P0 = 0 + DoD PASS → STOP BUILDING → VERIFY → CLOSE`
+
+This Mission Contract, Autonomous Continuation, and Closure Runtime apply automatically to every AI, agent, chat, or tool that starts substantial work through `/my`; the owner should not need to repeat these operating instructions in each workstream.
+
 ## Unified Execution Runtime — `/loop`
 
 `/loop` is Mindway's primary execution-control command for substantial work. It combines planning, useful-cycle budgeting, execution topology, bounded continuation, verification, targeted repair, checkpoint/resume, and hard-blocker handling.
