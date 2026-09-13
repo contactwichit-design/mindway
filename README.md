@@ -30,10 +30,48 @@ Full bootstrap contract: [BOOTSTRAP.md](BOOTSTRAP.md)
 /my
 ```
 
+## Continuity / Center AI
+
+สำหรับงานต่อเนื่องที่ต้องข้ามแชท ข้าม AI ข้ามโมเดล หรือกลับมาทำต่อภายหลัง ให้ใช้ [Continuity Center Runtime](skills/continuity-center/SKILL.md)
+
+หลักคือไม่พึ่งความจำของ AI ตัวใดตัวหนึ่ง แต่ให้ AI อ่านบันทึกงานที่มีรหัสและย้อนกลับไปตรวจ source จริงก่อนทำต่อ
+
+### Shorthand
+
+เมื่อ owner ส่งคำสั่งในรูปแบบ:
+
+```text
+/my <work-code>
+```
+
+เช่น:
+
+```text
+/my 13926-1
+```
+
+ให้ตีความว่า:
+
+1. เข้า canonical `/my` ตามปกติและผ่าน Entry Access Gate ก่อน
+2. โหลด Continuity Center Runtime
+3. ใช้ `<work-code>` ตามที่ owner พิมพ์แบบ exact; ห้าม renumber หรือเดาความหมายใหม่
+4. รีวิว current conversation และ continuity record ที่เกี่ยวข้องซึ่งเข้าถึงได้
+5. สำหรับงาน handoff/off-load หรือระบบซับซ้อน ให้เขียน/อัปเดต **DEEP continuity record** ไม่ใช่สรุปบาง ๆ
+6. เก็บ mission, current state, completed/verified work, decisions + rationale, hard locks, dependencies, source of truth, data/interface contracts, risks, failed routes, human/emotional context ที่มีผลต่อการทำงาน, open loops, next actions และ resume instruction เท่าที่เกี่ยวข้อง
+7. ใช้ continuity storage/location ที่ workspace หรือ owner กำหนดไว้เดิม; **ห้ามสร้างโฟลเดอร์/พื้นที่ใหม่แทนเอง** หากตำแหน่งเดิมหาไม่พบหรือเขียนไม่ได้ ให้รายงาน blocker แทนการสร้างของใหม่
+8. หลังเขียนสำเร็จ ให้ verify การบันทึกและส่งลิงก์/ตำแหน่งกลับให้ owner
+
+`/my <work-code>` เป็น shorthand สำหรับ continuity workflow ไม่ใช่การฝากความจำไว้ในโมเดลตัวเดียว
+
+Center AI เป็น **บทบาทกลาง** ไม่ใช่ model identity ถาวร จึงสามารถเปลี่ยน AI/provider ในอนาคตได้ โดยอ่าน continuity records และ authoritative sources เดิมก่อนทำงานต่อ
+
+ข้อจำกัดสำคัญ: `/my` ไม่ได้ข้ามสิทธิ์ของระบบภายนอก หาก AI ตัวนั้นไม่มีสิทธิ์หรือ connector ไปยัง Google Drive / repository / source เดิม มันต้องรายงานข้อจำกัดตรง ๆ และห้ามอ้างว่าได้อ่านหรืออัปเดตแล้ว
+
 ## อ่านต่อ
 
 - [Bootstrap Contract](BOOTSTRAP.md)
 - [Public Standard](PUBLIC_STANDARD.md)
+- [Continuity Center Runtime](skills/continuity-center/SKILL.md)
 - [Welcome](WELCOME.md)
 - [How to Use Mindway](USE_MINDWAY.md)
 - [Origin Story](ORIGIN_STORY.md)
