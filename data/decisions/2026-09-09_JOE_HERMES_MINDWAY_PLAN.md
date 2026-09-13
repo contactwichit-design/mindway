@@ -1,6 +1,7 @@
 # JOE × Hermes × Mindway — Working Plan
 
 Date: 2026-09-09
+Last 360 closeout: 2026-09-14
 Status: REVIEW_READY / ACTIVE_DIRECTION
 Owner: ZAFT
 
@@ -112,6 +113,76 @@ Performance is first-class.
 - Private management/access plane preferred; do not expose a privileged Hermes control API directly to the public Internet.
 - JOE Web is a separate front-end service communicating with Hermes through a controlled API/event channel.
 
+## Candidate implementation history
+The local `joe-candidate` evolved through multiple verified checkpoints:
+- Early runnable demo: commit `2803da3` on `candidate/joe-workspace`.
+- Follow-up integration/UI checkpoint: `950006d`.
+- Local performance/memory work: code `fc6f21c`, handoff `889d13a`.
+- Owner-gate preparation: `1a85d5f`, checkpoint `89e1b42`.
+- Windows Hermes bootstrap repair: commit `2f16ca4`, checkpoint `2697d40`.
+
+Reported verification improved from 20 → 23 → 32 → 42 tests, with lint/typecheck/build passing and dependency audit reporting 0 vulnerabilities at the latest bootstrap checkpoint.
+
+## Current Candidate behavior
+JOE Candidate currently targets:
+- Chat streaming
+- Projects
+- Mindmap
+- Canvas
+- Media Library
+- Personal/Company boundary awareness
+- local-first project/memory persistence
+- bounded context to Hermes
+- Codex-first coding route
+- same-origin Node policy boundary
+- isolated Hermes profile
+
+The Candidate architecture intentionally keeps company sources disabled and keeps personal Hermes isolated from company mounts/connectors/credentials.
+
+## Runtime / authentication progress
+### Completed
+- Git for Windows installed successfully after bootstrap found `git` missing.
+- Windows bootstrap was repaired so owner should not manually build a Python venv.
+- Bootstrap now detects Python, creates/repairs isolated venv, installs pinned dependencies, handles Windows long-path behavior, and is intended to be idempotent.
+- Hermes runtime/gateway was observed running after bootstrap.
+- Codex device authentication setting in ChatGPT Security was enabled.
+- **OpenAI Codex OAuth succeeded**; terminal confirmed credential added as `openai-codex-oauth-1`.
+
+### Still requiring acceptance verification
+Do not mark `LIVE_CANDIDATE` until all are actually proven:
+- `provider-check` resolves Codex successfully.
+- real Hermes general request succeeds.
+- real Codex coding request succeeds and actual provider is verified.
+- second-turn/session continuity works.
+- project memory survives expected reload/restart behavior.
+- reconnect/error path works.
+- any prior `HERMES_EMPTY_RESPONSE` condition is either gone or root-caused/fixed.
+- pending media QA is closed: video, PDF, download, cancel/reselect, large-file behavior.
+- GitHub remote/private repo push and PR evidence are completed if still pending.
+- full regression remains green.
+
+## Owner-action policy
+For Candidate work, Codex was authorized to continue through safe/reversible work without asking repeatedly. Owner actions should be batched and requested only where interactive login/account confirmation is genuinely required.
+
+Allowed Candidate scope included:
+- isolated personal Hermes setup
+- Codex personal OAuth
+- candidate code/refactors/tests
+- browser/mobile QA
+- Docker/local deployment/config scripts
+- JOE identity/memory/skills structure
+- GitHub private Candidate repo work without secrets
+
+Still blocked without separate approval:
+- Production deployment
+- public sharing
+- new billing/cost commitments
+- company-wide Google Workspace access
+- company credentials
+- patient/employee/payroll/HR-confidential data
+- destructive operations
+- canonical `/my` modifications
+
 ## Initial build sequence
 1. Preserve this decision log.
 2. Create JOE continuity package: persona/SOUL, durable user context, project boundaries, Mindway Core rules.
@@ -141,4 +212,14 @@ Performance is first-class.
 **Codex = preferred first coding worker when plan allowance is available.**
 **JOE Web = target primary visual workspace.**
 
-Next milestone: Candidate Hermes runtime + JOE continuity pack + Codex path validation, then minimal high-performance JOE Web.
+## 360 closeout — 2026-09-14
+Preserve these points for the next session:
+1. Do not restart architecture discussion from zero; Hermes-at-front + JOE identity + Mindway DNA is the accepted direction.
+2. Do not add unrelated product features before closing `LIVE_CANDIDATE` acceptance.
+3. Next execution order: provider-check → live Hermes request → live Codex route → continuity/memory → media QA → GitHub remote evidence → full regression.
+4. Keep Personal and Company security zones separated; no company-sensitive data in personal memory/runtime.
+5. Keep Codex-first routing for code to use existing allowance before unnecessary API spend.
+6. JOE Web remains visual-first: Chat + Mindmap + Canvas + media/work views, with local-first performance and streaming AI.
+7. Canonical `/my` remains unchanged by this project unless separately reviewed.
+
+Next milestone: **close `LIVE_CANDIDATE` evidence gate, then move to Growth Memory/Skills quality and broader JOE Web hardening.**
