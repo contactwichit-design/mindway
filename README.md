@@ -36,6 +36,14 @@ Full bootstrap contract: [BOOTSTRAP.md](BOOTSTRAP.md)
 
 หลักคือไม่พึ่งความจำของ AI ตัวใดตัวหนึ่ง แต่ให้ AI อ่านบันทึกงานที่มีรหัสและย้อนกลับไปตรวจ source จริงก่อนทำต่อ
 
+### `/myoff` — canonical handoff / off-load
+
+เมื่อ owner ส่งคำสั่ง `/myoff` ให้เข้า canonical `/my` ก่อน แล้วโหลด [`myoff.md`](myoff.md) และ [skills/myoff/SKILL.md](skills/myoff/SKILL.md)
+
+`/myoff` เป็น DEEP Resume Package ไม่ใช่ chat summary. สำหรับ Mindway `00_MAIN` ปัจจุบัน skill จะระบุ canonical Native Google Sheet, tab contract, evidence states, PASS gate, write sequence และ read-back verification ที่ AI ทุกตัวต้องใช้เหมือนกัน
+
+ห้ามสร้างที่เก็บใหม่เองเมื่อ canonical destination เขียนไม่ได้; ให้รายงาน `PERSISTENCE_BLOCKED` ตาม skill และห้ามอ้างว่าบันทึกสำเร็จ
+
 ### Shorthand
 
 เมื่อ owner ส่งคำสั่งในรูปแบบ:
@@ -72,6 +80,8 @@ Center AI เป็น **บทบาทกลาง** ไม่ใช่ model 
 - [Bootstrap Contract](BOOTSTRAP.md)
 - [Public Standard](PUBLIC_STANDARD.md)
 - [Continuity Center Runtime](skills/continuity-center/SKILL.md)
+- [`/myoff` Entry](myoff.md)
+- [`/myoff` Skill](skills/myoff/SKILL.md)
 - [Welcome](WELCOME.md)
 - [How to Use Mindway](USE_MINDWAY.md)
 - [Origin Story](ORIGIN_STORY.md)
