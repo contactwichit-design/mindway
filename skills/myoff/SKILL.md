@@ -1,7 +1,7 @@
 ---
 name: myoff
 description: Canonical Mindway DEEP handoff and persistence contract for resumable cross-chat work.
-version: 1.0.0
+version: 1.1.0
 status: ACTIVE
 ---
 
@@ -178,11 +178,24 @@ A `/myoff` package is sufficient only if a capable AI that did not see the origi
 
 If the next AI must ask the owner to retell basic prior state, the handoff is `INCOMPLETE`.
 
-## Handoff ID
+## Run ID, Handoff ID, and CHATKEY
 
-Reuse an owner/project-defined exact work code or Run ID when it already supplies the continuity identity. Otherwise create a stable unique Handoff ID and use that exact same ID in `06_HANDOFF_DETAIL` and `01_AI_LOG`.
+Treat these as distinct identities:
 
-Do not renumber an owner-supplied work code.
+- `Run ID` = an owner/project/batch identity. It MAY be reused across multiple chats or workstreams and therefore is not guaranteed unique.
+- `Handoff ID` = the unique stable identity of one handoff record. It MUST be unique within the canonical Control Center and MUST be the exact same value in `06_HANDOFF_DETAIL` and `01_AI_LOG`.
+- `CHATKEY` = a stable chat/workstream/topic discriminator when useful for repeated handoffs from the same owner Run ID.
+
+Before every write:
+1. Search the canonical Control Center for the proposed Handoff ID.
+2. If no match exists, append a new record.
+3. If exactly one match exists and it is clearly the same chat/workstream handoff being retried with no new material state, read it back and do not create duplicate noise.
+4. If the proposed identifier already belongs to a different chat/workstream/topic, DO NOT overwrite it. Generate a unique Handoff ID by combining the exact owner Run ID with a stable CHATKEY/workstream discriminator or another collision-safe suffix.
+5. Preserve the owner-supplied Run ID exactly in `Related IDs` even when the Handoff ID needs a unique suffix.
+
+Handoff persistence is append-only across different chats/workstreams. Never overwrite, delete, or repurpose another chat's handoff row to resolve an identity collision.
+
+Do not renumber or alter an owner-supplied work code or Run ID.
 
 ## Write sequence
 
