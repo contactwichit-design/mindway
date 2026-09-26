@@ -183,6 +183,25 @@ Core invariants:
 
 This Mission Contract, Autonomous Continuation, and Closure Runtime apply automatically to every AI, agent, chat, or tool that starts substantial work through `/my`; the owner should not need to repeat these operating instructions in each workstream.
 
+## ZF Command Layer — simple owner interface
+
+The owner-facing command layer is intentionally small. The owner should not need to remember internal runtimes, skills, templates, or orchestration details.
+
+- `/my` — THINK / ENTER: enter canonical Mindway, understand the request, and select the minimum appropriate workflow, skills, sources, and execution mode.
+- `/go` — DO: execute the requested work within the established mission and authority; verify results and repair material failures when safe and in scope.
+- `/ck` — CHECK: audit, inspect, compare, verify, and identify gaps. Default is read-only: do not write, edit, delete, or mutate the SSOT unless the owner explicitly adds write authority.
+- `/save` — SAVE: capture the useful durable result or decision in the designated canonical SSOT / Control Center, then read back the written target to verify persistence.
+- `/myoff` — legacy compatibility alias for `/save`. Preserve existing historical `/myoff` records and resume packages; new owner-facing usage should prefer `/save`.
+
+Rules:
+1. Keep these owner-facing semantics stable and easy to remember.
+2. Internal commands such as `/loop`, `/fy`, templates, swarm, and task-specific skills remain available to the AI and may be selected automatically; the owner does not need to invoke them.
+3. `/ck` never implies persistence. CHECK and SAVE are separate operations.
+4. `/save` writes only to a verified designated SSOT. Never guess a write target. If no target is established, resolve it from authoritative project governance or request the minimum missing target information.
+5. A successful `/save` requires read-back verification. A write attempt without verified read-back must not be reported as successfully saved.
+6. `/go` does not weaken approval, privacy, safety, source-of-truth, cost, publishing, destructive-action, or high-impact gates.
+7. These commands are an interface layer over Mindway; they do not replace the canonical runtimes below.
+
 ## Unified Execution Runtime — `/loop`
 
 `/loop` is Mindway's primary execution-control command for substantial work. It combines planning, useful-cycle budgeting, execution topology, bounded continuation, verification, targeted repair, checkpoint/resume, and hard-blocker handling.
@@ -340,15 +359,22 @@ Do not offer to bypass `/my` and begin unrelated substantial work while canonica
 ## The commands
 
 ```text
+# owner-facing commands
 /my
+/go
+/ck
+/save
+
+# internal / advanced execution commands
 /loop
 /loop1 ... /loop99
 /loop plan
 /loop resume <run_id>
 
 # compatibility aliases
+/myoff -> /save
 /my1 ... /my99
 /fy
 ```
 
-`/my` remains the mandatory entry. `/loop` is the primary execution controller. Legacy `/myN` and `/fy` remain compatibility aliases during migration.
+`/my` remains the mandatory entry. `/go`, `/ck`, and `/save` are the simple owner-facing action commands. `/loop` remains the primary internal execution controller. `/myoff` is a legacy alias for `/save`; legacy `/myN` and `/fy` remain compatibility aliases during migration.
