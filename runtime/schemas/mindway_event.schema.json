@@ -1,24 +1,12 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://mindway.example/schemas/mindway_event.schema.json",
-  "title": "Mindway Runtime Event",
-  "type": "object",
-  "required": ["schema_version", "event_id", "run_id", "type", "timestamp", "sequence"],
-  "properties": {
-    "schema_version": {"const": "1.0"},
-    "event_id": {"type": "string", "minLength": 1},
-    "run_id": {"type": "string", "minLength": 1},
-    "parent_event_id": {"type": ["string", "null"]},
-    "type": {"type": "string", "enum": ["run.created","orient.started","plan.created","route.selected","work.started","work.completed","tool.called","tool.succeeded","tool.failed","verify.started","verify.pass","verify.fail","fix.started","fix.completed","improvement.proposed","approval.required","checkpoint.saved","run.resumed","run.completed","run.stopped"]},
-    "timestamp": {"type": "string", "format": "date-time"},
-    "sequence": {"type": "integer", "minimum": 0},
-    "cycle": {"type": "integer", "minimum": 0},
-    "actor": {"type": ["string", "null"]},
-    "subject": {"type": ["string", "null"]},
-    "status": {"type": ["string", "null"]},
-    "evidence": {"type": "array", "items": {"type": "string"}},
-    "payload": {"type": "object", "additionalProperties": true},
-    "redaction": {"type": "object", "properties": {"applied": {"type": "boolean"}, "fields": {"type": "array", "items": {"type": "string"}}}, "additionalProperties": false}
-  },
-  "additionalProperties": false
+ "$schema":"https://json-schema.org/draft/2020-12/schema","$id":"https://mindway.example/schemas/mindway_event.schema.json","title":"Mindway Runtime Event v2","type":"object",
+ "required":["schema_version","event_id","run_id","type","timestamp","sequence","trace_id","span_id"],
+ "properties":{
+  "schema_version":{"const":"2.0"},"event_id":{"type":"string"},"run_id":{"type":"string"},
+  "type":{"type":"string","enum":["run.created","orient.started","plan.created","route.selected","work.started","work.completed","tool.called","tool.succeeded","tool.failed","verify.started","verify.pass","verify.fail","fix.started","fix.completed","failure.detected","failure.diagnosed","failure.patched","failure.verified","failure.closed","failure.reopened","improvement.proposed","approval.required","approval.validated","checkpoint.saved","run.resumed","run.completed","run.stopped"]},
+  "timestamp":{"type":"string","format":"date-time"},"sequence":{"type":"integer","minimum":0},"cycle":{"type":"integer","minimum":0},
+  "actor":{"type":["string","null"]},"subject":{"type":["string","null"]},"status":{"type":["string","null"]},"evidence":{"type":"array","items":{"type":"string"}},"payload":{"type":"object"},
+  "trace_id":{"type":"string"},"span_id":{"type":"string"},"parent_span_id":{"type":["string","null"]},"links":{"type":"array","items":{"type":"string"}},"branch_id":{"type":["string","null"]},
+  "redaction":{"type":"object","required":["applied","fields"],"properties":{"applied":{"type":"boolean"},"fields":{"type":"array","items":{"type":"string"}}},"additionalProperties":false}
+ },"additionalProperties":false
 }
