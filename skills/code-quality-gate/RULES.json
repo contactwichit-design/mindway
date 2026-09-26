@@ -1,0 +1,115 @@
+{
+  "version": "0.1.0",
+  "status": "CANDIDATE",
+  "policy": {
+    "tech_valid_is_not_review_ready": true,
+    "behavior_preservation_default": true,
+    "security_and_project_invariants_override_cleanup": true,
+    "scalar_score_is_not_sufficient_for_promotion": true,
+    "independent_review_when_materially_useful": true
+  },
+  "verdicts": [
+    "PASS",
+    "PASS_WITH_DEBT",
+    "REPAIR_REQUIRED",
+    "BLOCKED_BY_INVARIANT"
+  ],
+  "rules": [
+    {
+      "id": "CQG-COMMENT-001",
+      "family": "COMMENTS",
+      "title": "Redundant narration comment",
+      "default_severity": "LOW",
+      "deterministic_hint": false,
+      "repair": "Remove comments that merely restate syntax; preserve rationale, constraints, public API notes, and non-obvious intent."
+    },
+    {
+      "id": "CQG-TYPE-001",
+      "family": "TYPE_ESCAPES",
+      "title": "Unjustified type escape",
+      "default_severity": "MEDIUM",
+      "deterministic_hint": true,
+      "repair": "Replace broad type escape with a precise type or document a verified boundary reason."
+    },
+    {
+      "id": "CQG-DEF-001",
+      "family": "DEFENSIVE_OVERGROWTH",
+      "title": "Broad exception handling",
+      "default_severity": "MEDIUM",
+      "deterministic_hint": true,
+      "repair": "Narrow the exception scope/type and preserve required error propagation or domain handling."
+    },
+    {
+      "id": "CQG-DEF-002",
+      "family": "DEFENSIVE_OVERGROWTH",
+      "title": "Swallowed exception",
+      "default_severity": "HIGH",
+      "deterministic_hint": true,
+      "repair": "Handle, translate, log with purpose, or re-raise the error; do not silently discard failures without an evidenced invariant."
+    },
+    {
+      "id": "CQG-NEST-001",
+      "family": "NESTING_CONTROL_FLOW",
+      "title": "Excessive control-flow nesting",
+      "default_severity": "MEDIUM",
+      "deterministic_hint": true,
+      "repair": "Prefer early return/continue or smaller behavior-preserving units when this reduces cognitive load."
+    },
+    {
+      "id": "CQG-ABS-001",
+      "family": "ABSTRACTION",
+      "title": "Single-use abstraction without complexity reduction",
+      "default_severity": "LOW",
+      "deterministic_hint": false,
+      "repair": "Inline or simplify when the abstraction adds indirection without domain meaning, reuse, isolation, or testability benefit."
+    },
+    {
+      "id": "CQG-NAME-001",
+      "family": "NAMING_STYLE",
+      "title": "Generic or misleading naming",
+      "default_severity": "LOW",
+      "deterministic_hint": false,
+      "repair": "Use local domain vocabulary and names that expose purpose rather than implementation accident."
+    },
+    {
+      "id": "CQG-DUP-001",
+      "family": "DUPLICATION_COMPLEXITY",
+      "title": "Repeated logic",
+      "default_severity": "MEDIUM",
+      "deterministic_hint": false,
+      "repair": "Consolidate only when the repeated behavior has the same reason to change; do not force unrelated cases behind a shared abstraction."
+    },
+    {
+      "id": "CQG-DEAD-001",
+      "family": "DUPLICATION_COMPLEXITY",
+      "title": "Dead or unreachable code",
+      "default_severity": "MEDIUM",
+      "deterministic_hint": true,
+      "repair": "Remove verified dead code after confirming no dynamic/plugin/reflection contract depends on it."
+    },
+    {
+      "id": "CQG-TEST-001",
+      "family": "TEST_SLOP",
+      "title": "Weak behavioral assertion",
+      "default_severity": "MEDIUM",
+      "deterministic_hint": false,
+      "repair": "Assert externally meaningful behavior and important failure modes instead of merely mirroring implementation details."
+    },
+    {
+      "id": "CQG-TEST-002",
+      "family": "TEST_SLOP",
+      "title": "Excessive internal mocking",
+      "default_severity": "LOW",
+      "deterministic_hint": false,
+      "repair": "Mock at stable boundaries; avoid coupling tests to internal call choreography unless that choreography is itself contractual."
+    },
+    {
+      "id": "CQG-INV-001",
+      "family": "INVARIANT_PROTECTION",
+      "title": "Cleanup conflicts with protected invariant",
+      "default_severity": "BLOCKER",
+      "deterministic_hint": false,
+      "repair": "Do not auto-apply the cleanup. Preserve the invariant and escalate the conflict with evidence."
+    }
+  ]
+}
