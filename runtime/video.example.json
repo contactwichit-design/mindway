@@ -1,0 +1,22 @@
+{
+  "schema_version": "0.1",
+  "project_id": "EXAMPLE-VIDEO-001",
+  "story_spine": [
+    "Preserve the approved learning point",
+    "Show only media that supports the current narration",
+    "Finish with a verifiable delivery artifact"
+  ],
+  "source": {"path": "input.mp4"},
+  "captions": [
+    {"start": 0.5, "end": 3.5, "text": "ตัวอย่างคำบรรยายภาษาไทย"}
+  ],
+  "delivery": {
+    "width": 1920,
+    "height": 1080,
+    "fps": 30,
+    "fit": "pad",
+    "caption_font": "Noto Sans Thai",
+    "crf": 18
+  },
+  "output": {"path": "output.mp4", "overwrite": false}
+}
