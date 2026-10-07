@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mindway.example/schemas/video_project.schema.json",
+  "title": "Mindway Video Project v0.1",
+  "type": "object",
+  "required": ["schema_version", "project_id", "source", "delivery", "output"],
+  "properties": {
+    "schema_version": {"const": "0.1"},
+    "project_id": {"type": "string", "minLength": 1},
+    "story_spine": {"type": "array", "items": {"type": "string"}},
+    "source": {
+      "type": "object",
+      "required": ["path"],
+      "properties": {"path": {"type": "string", "minLength": 1}}
+    },
+    "captions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["start", "end", "text"],
+        "properties": {
+          "start": {"type": "number", "minimum": 0},
+          "end": {"type": "number", "exclusiveMinimum": 0},
+          "text": {"type": "string"}
+        }
+      }
+    },
+    "delivery": {
+      "type": "object",
+      "required": ["width", "height", "fps"],
+      "properties": {
+        "width": {"type": "integer", "minimum": 2},
+        "height": {"type": "integer", "minimum": 2},
+        "fps": {"type": "number", "exclusiveMinimum": 0},
+        "fit": {"enum": ["pad", "crop"]},
+        "caption_font": {"type": "string"},
+        "crf": {"type": "integer", "minimum": 0, "maximum": 51}
+      }
+    },
+    "output": {
+      "type": "object",
+      "required": ["path"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "overwrite": {"type": "boolean"}
+      }
+    }
+  }
+}
