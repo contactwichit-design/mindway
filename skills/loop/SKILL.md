@@ -1,7 +1,7 @@
 ---
 name: loop
 description: Unified Mindway execution command combining planning, bounded continuation, recursive improvement, repair propagation, verification, checkpoint/resume, and optional parallel topology.
-version: 0.2.0
+version: 0.2.1
 status: EXPERIMENTAL
 ---
 
@@ -76,6 +76,22 @@ A run is `COMPLETE` only when the requested outcome is verified complete or no f
 For a reusable failure, closure requires: root cause repaired/contained; original case verified; reasonable analogous scope checked; regression/prevention added where feasible; no known consequential patch side effect unresolved; original mission still passes; and further recursion has no meaningful evidence-supported value.
 
 Future evidence may reopen a closed failure.
+
+## Learning closeout and recurrence prevention
+
+After every meaningful verified execution step or useful cycle that materially changes state, perform a compact learning closeout before moving on:
+
+`RESULT -> WHY -> REUSABLE_LEARNING -> PREVENTION -> REGRESSION -> RECORD|NO_RECORD`
+
+Rules:
+1. Crystallize what worked, what failed, why, and what should change in future execution; do not merely restate the event.
+2. If the step exposed a reusable failure or systemic defect, RIL governs closure. The step is not truly closed until the producing mechanism is repaired/contained, prevention is propagated within justified scope, or explicit failure debt is recorded.
+3. Convert durable learning into the smallest reusable change: update an existing rule/template/skill/test/checklist before creating a new artifact.
+4. Add or update a regression/QC check when a repeated mistake is realistically testable.
+5. Before future similar work, consult the relevant durable learning/check before repeating the same route.
+6. Record only learning that changes future execution. Trivial success, unchanged state, or duplicate observations should produce `NO_RECORD`.
+7. Keep private/company/patient/employee/credential details out of public Mindway. Store sensitive project-specific evidence only in the authorized private project/control surface and retain only the generalized safe lesson in public Mindway.
+8. Useful classifications include `KEEP | REFINE | MERGE | SPLIT | DEPRECATE | CREATE_NEW | NEED_CONFIRM`.
 
 ## Observability
 Emit minimal redacted events for task/routing/work/tool/QC/fix/RIL propagation/impact/regression/checkpoint/resume/improvement/completion when the runtime supports events. Observatory views must not invent causality.
