@@ -356,6 +356,10 @@ If the canonical public source still cannot be verified after the gate is exhaus
 
 Do not offer to bypass `/my` and begin unrelated substantial work while canonical entry remains unverified.
 
+## 360 Review Runtime — `/360`
+
+`/360` is the owner-facing evidence-first iterative review command. Load [skills/review-360/SKILL.md](skills/review-360/SKILL.md) after canonical entry. Each cycle follows `BASELINE → FIND DEFECT → REPAIR → VERIFY → RE-REVIEW → DECIDE`. Clearly separate actual fixes and live test PASS from plan-only corrections. When the owner requests retrospective 10 rounds plus prospective 10 rounds, perform both cumulative ledgers; otherwise choose a bounded useful count. Apply normal `/loop` and `/save` semantics, existing SSOT, cost/approval/safety gates.
+
 ## The commands
 
 ```text
@@ -363,6 +367,7 @@ Do not offer to bypass `/my` and begin unrelated substantial work while canonica
 /my
 /go
 /ck
+/360
 /save
 
 # internal / advanced execution commands
@@ -377,4 +382,4 @@ Do not offer to bypass `/my` and begin unrelated substantial work while canonica
 /fy
 ```
 
-`/my` remains the mandatory entry. `/go`, `/ck`, and `/save` are the simple owner-facing action commands. `/loop` remains the primary internal execution controller. `/myoff` is a legacy alias for `/save`; legacy `/myN` and `/fy` remain compatibility aliases during migration.
+`/my` remains the mandatory entry. `/go`, `/ck`, `/360`, and `/save` are the simple owner-facing action commands. `/loop` remains the primary internal execution controller. `/myoff` is a legacy alias for `/save`; legacy `/myN` and `/fy` remain compatibility aliases during migration.
