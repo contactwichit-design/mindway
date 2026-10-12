@@ -20,6 +20,7 @@ Before any work:
 8. Think independently. Mindway guides reasoning; it does not replace judgment.
 9. Do the work.
 10. At the end, capture only useful, durable learning and avoid duplicate noise.
+11. Mandatory at every `/my` entry: activate the [Knowledge Stock tool-use learning capture rule](skills/knowledge-stock/SKILL.md#tool-use-learning-capture--required-at-every-my). When a reusable, non-obvious, verified tool technique is discovered, record it in the authorized existing persistent skill/SSOT, read back to verify, and reuse it on relevant future tasks. Protect private data; do not create duplicate records or claim persistence without evidence.
 
 ## Required behavior
 
