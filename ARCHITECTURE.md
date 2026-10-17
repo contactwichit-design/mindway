@@ -18,6 +18,12 @@ Purpose: preserve system shape while Mindway evolves.
 - project/task layer — scoped rules and source-of-truth for a mission; may extend but not override canonical governance.
 - observability/record — evidence of what actually happened; never a source for invented execution.
 
+## Responsibility boundaries
+
+Mindway supplies the portable work contract. The user-facing assistant owns understanding, tool/worker coordination and verified delivery. The existing workspace owns only the durable execution records assigned to it: task identity, checkpoints, artifact references and evidence. Business/source systems retain authority over their own data. Reuse existing owners, stores, routes and queues; add a component only for a demonstrated requirement they cannot meet.
+
+The entry keeps invariants and routing; specialist production procedures load only for relevant work. A same-session verified source receipt may be reused under the Entry Access Gate. This does not grant access, restore revoked authority, imply cross-client interoperability, or permit false fresh-load claims.
+
 ## Dependency direction
 
 Preferred direction:

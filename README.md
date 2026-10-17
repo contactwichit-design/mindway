@@ -30,17 +30,19 @@ Full bootstrap contract: [BOOTSTRAP.md](BOOTSTRAP.md)
 /my
 ```
 
+เมื่อเข้าและตรวจ `/my` แล้ว คุยงานตามธรรมชาติได้ ใช้ `/go` เพื่อลงมือ `/ck` เพื่อตรวจ และ `/save` เพื่อบันทึกเมื่ออยากระบุโหมดชัดเจน ไม่จำเป็นต้องพิมพ์ทุกคำสั่งซ้ำในทุกคำขอ การอ่านซ้ำขึ้นกับการเปลี่ยน revision, context และอำนาจตาม [Entry Access Gate](skills/entry-access-gate/SKILL.md)
+
 ## Continuity / Center AI
 
 สำหรับงานต่อเนื่องที่ต้องข้ามแชท ข้าม AI ข้ามโมเดล หรือกลับมาทำต่อภายหลัง ให้ใช้ [Continuity Center Runtime](skills/continuity-center/SKILL.md)
 
 หลักคือไม่พึ่งความจำของ AI ตัวใดตัวหนึ่ง แต่ให้ AI อ่านบันทึกงานที่มีรหัสและย้อนกลับไปตรวจ source จริงก่อนทำต่อ
 
-### `/myoff` — canonical handoff / off-load
+### `/save` — canonical handoff / off-load
 
-เมื่อ owner ส่งคำสั่ง `/myoff` ให้เข้า canonical `/my` ก่อน แล้วโหลด [`myoff.md`](myoff.md) และ [skills/myoff/SKILL.md](skills/myoff/SKILL.md)
+เมื่อ owner ส่งคำสั่ง `/save` หรือ alias เดิม `/myoff` ให้ใช้สถานะ canonical `/my` ที่ตรวจแล้วในแชทนี้ (หรือเข้าใหม่หากยังไม่ผ่าน) แล้วโหลด [`myoff.md`](myoff.md) และ [skills/myoff/SKILL.md](skills/myoff/SKILL.md)
 
-`/myoff` เป็น DEEP Resume Package ไม่ใช่ chat summary. สำหรับ Mindway `00_MAIN` ปัจจุบัน skill จะระบุ canonical Native Google Sheet, tab contract, evidence states, PASS gate, write sequence และ read-back verification ที่ AI ทุกตัวต้องใช้เหมือนกัน
+`/save` ใช้ DEEP Resume Package ตาม scope ที่เกี่ยวข้อง โดยคง `/myoff` เป็น compatibility alias และรักษาประวัติเดิม. สำหรับ Mindway `00_MAIN` ปัจจุบัน skill จะระบุ canonical Native Google Sheet, tab contract, evidence states, PASS gate, write sequence และ read-back verification ที่ AI ทุกตัวต้องใช้เหมือนกัน
 
 ห้ามสร้างที่เก็บใหม่เองเมื่อ canonical destination เขียนไม่ได้; ให้รายงาน `PERSISTENCE_BLOCKED` ตาม skill และห้ามอ้างว่าบันทึกสำเร็จ
 

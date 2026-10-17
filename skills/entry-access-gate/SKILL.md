@@ -1,7 +1,12 @@
+---
+name: entry-access-gate
+description: Verify canonical Mindway entry and required references, recover access through available safe routes, and distinguish fresh, cached, stale and unverified context before substantial work.
+---
+
 # Mindway Entry Access Gate
 
 Status: REQUIRED
-Scope: every `/my`, `/loop`, legacy `/myN`, and substantial-work entry
+Scope: initial or refreshed `/my` entry; `/loop`, legacy `/myN`, and substantial work require that verified entry state
 Pre-entry contract: `MW-BOOT/1` → `BOOTSTRAP.md`
 
 ## Mission
@@ -64,6 +69,10 @@ Do not confuse a canonical-looking cached copy with current canonical state when
 - If a browser, search, proxy, or cache route succeeds and a native GitHub/repository/API route is also available, prefer the native route for current `main` version evidence and reconcile material differences before declaring a fresh load.
 - If a known stale or older revision is returned, classify it as `CONTENT_STALE` and continue to a fresher safe route.
 - If no stronger freshness primitive exists, do not invent one and do not fail a valid canonical route merely for lacking a SHA. Use the strongest available provenance and state any material freshness limitation honestly.
+
+## Reuse within a verified session
+
+Keep the successful source/revision receipt and required loaded content available in the current session. Reuse unchanged verified entry state for subsequent owner commands and natural-language work; do not repeat transport discovery merely because another task begins. Re-enter for a new session, explicit refresh, lost or unverifiable loaded context, or evidence of a governing revision change. This is reuse of an actual verified read, not permission to substitute remembered text. Recheck current source and authority where the action requires them; a cached approval never overrides a later revocation. Apply the freshness rules above whenever a fresh-load claim is made.
 
 ## Failure classification
 
