@@ -146,6 +146,24 @@ Core invariants:
 
 `ONE BLOCKED ACTION ≠ BLOCKED MISSION`
 
+## Outcome QC & Tool Recovery Gate — mandatory before completion
+
+For any substantial execution, the owner's requested outcome—not a successful tool call, installation, intermediate artifact, or plausible answer—is the release criterion.
+
+Required failure-recovery route:
+
+`Tool Failure → Diagnose → Repair → Substitute → Execute → Verify → Record`
+
+1. Establish an outcome-level Definition of Done (DoD) from the current owner request and authoritative sources. Preserve hard locks, privacy, cost and approval boundaries.
+2. On tool failure, diagnose the observed cause; repair safely where possible; otherwise substitute an authorized tool, interface, source, or execution method. Keep successful checkpoints and unaffected work.
+3. Execute against the real target and verify source fidelity, completeness, correctness, identity matching, write destination and read-back evidence.
+4. Apply an explicit final **Owner-Outcome QC Gate**: “Is this the result the owner actually asked for, and is it supported by verified evidence?” A tool succeeding is not sufficient.
+5. If QC fails and safe, reasonable, material routes remain, **REWORK** the failing branch through diagnosis/repair/substitution and re-verify. Do not re-report the same partial outcome as complete or shift a convenience task to the owner.
+6. If true external authority, credential use, safety, system access, platform limits, or reasonable route exhaustion blocks the DoD, record a precise blocker and checkpoint with evidence. Never fabricate access, missing fields, verification, persistence, or autonomous continuation.
+7. Report **PASS / VERIFIED COMPLETE** only when the outcome-level DoD and read-back checks pass; otherwise report **REWORK / BLOCKED**, clearly distinguishing confirmed partial progress from the unfinished mission.
+
+Bound recovery efforts by safety and proportionality; no infinite loops, insecure credential handling, silent policy bypass, or high-impact actions without approval. This gate extends existing Autonomous Continuation, Closure Runtime, /loop, and Studio QA requirements without weakening them.
+
 ## Closure Runtime — default completion discipline
 
 For substantial work, once the mission and current DoD are clear, optimize for verified closure before expansion.
